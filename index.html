@@ -2,13 +2,14 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-
 <meta name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      content="width=device-width, initial-scale=1.0,
+      maximum-scale=1.0, user-scalable=no">
 
 <title>Fonda Pache Pache</title>
 
 <style>
+
 *{
   box-sizing:border-box;
 }
@@ -24,113 +25,39 @@ html,body{
 }
 
 /* CARRUSEL */
+
 #carrusel{
   width:100%;
   height:100dvh;
+
   display:flex;
+
   overflow-x:auto;
   overflow-y:hidden;
+
   scroll-snap-type:x mandatory;
   scroll-behavior:smooth;
-  -webkit-overflow-scrolling:touch;
+
   scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
 }
 
 #carrusel::-webkit-scrollbar{
   display:none;
 }
 
-/* CADA CATEGORÍA = UNA PÁGINA */
+/* UNA CATEGORIA POR PANTALLA */
+
 .pagina{
-  position:relative;
   flex:0 0 100%;
   width:100%;
   height:100dvh;
-  overflow:hidden;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:14px;
+
   scroll-snap-align:start;
-  scroll-snap-stop:always;
-  background:#2b160d;
-}
-
-/* IMAGEN ORIGINAL */
-.pagina img{
-  position:absolute;
-  width:300%;
-  max-width:none;
-  height:auto;
-  user-select:none;
-  pointer-events:none;
-}
-
-/* =========================
-   FILA SUPERIOR
-   ========================= */
-
-/* ALMUERZO */
-.almuerzo img{
-  left:0;
-  top:-50vw;
-}
-
-/* PICOTEO */
-.picoteo img{
-  left:-100%;
-  top:-50vw;
-}
-
-/* PARRILLA */
-.parrilla img{
-  left:-200%;
-  top:-50vw;
-}
-
-/* =========================
-   FILA CENTRAL
-   ========================= */
-
-/* BEBIDAS */
-.bebidas img{
-  left:0;
-  top:-180vw;
-}
-
-/* PARA LA GARGANTA */
-.garganta img{
-  left:-100%;
-  top:-180vw;
-}
-
-/* DESAYUNO */
-.desayuno img{
-  left:-200%;
-  top:-180vw;
-}
-
-/* =========================
-   FILA INFERIOR
-   ========================= */
-
-.ensaladas img,
-.agregados img{
-  width:200%;
-}
-
-/* ENSALADAS */
-.ensaladas img{
-  left:0;
-  top:-305vw;
-}
-
-/* AGREGADOS */
-.agregados img{
-  left:-100%;
-  top:-305vw;
-}
-
-/* TAPA TODO LO QUE QUEDE FUERA
-   DE LA CATEGORÍA VISIBLE */
-.pagina::before,
-.pagina::after{
-  content:"";
-  position:absolute;
-  left:0
+  scroll
