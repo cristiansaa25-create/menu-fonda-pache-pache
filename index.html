@@ -60,4 +60,294 @@ html,body{
   padding:14px;
 
   scroll-snap-align:start;
-  scroll
+  scroll-snap-stop:always;
+
+  background:#2b160d;
+}
+
+/* TARJETA RECORTADA */
+
+.tarjeta{
+  position:relative;
+
+  width:100%;
+  max-width:680px;
+
+  background-repeat:no-repeat;
+  background-image:url("menu.png");
+
+  border-radius:14px;
+
+  overflow:hidden;
+
+  box-shadow:
+    0 5px 20px rgba(0,0,0,.45);
+}
+
+/*
+================================================
+FILA 1
+Imagen completa = 3 columnas
+================================================
+*/
+
+/* ALMUERZO */
+
+.almuerzo .tarjeta{
+  aspect-ratio: 1 / 1.22;
+
+  background-size:300% auto;
+
+  background-position:
+    0% 35%;
+}
+
+/* PICOTEO */
+
+.picoteo .tarjeta{
+  aspect-ratio:1 / 1.22;
+
+  background-size:300% auto;
+
+  background-position:
+    50% 35%;
+}
+
+/* PARRILLA */
+
+.parrilla .tarjeta{
+  aspect-ratio:1 / 1.22;
+
+  background-size:300% auto;
+
+  background-position:
+    100% 35%;
+}
+
+
+/*
+================================================
+FILA 2
+================================================
+*/
+
+/* BEBIDAS */
+
+.bebidas .tarjeta{
+  aspect-ratio:1 / 1.10;
+
+  background-size:300% auto;
+
+  background-position:
+    0% 61%;
+}
+
+/* PARA LA GARGANTA */
+
+.garganta .tarjeta{
+  aspect-ratio:1 / 1.10;
+
+  background-size:300% auto;
+
+  background-position:
+    50% 61%;
+}
+
+/* DESAYUNO */
+
+.desayuno .tarjeta{
+  aspect-ratio:1 / 1.10;
+
+  background-size:300% auto;
+
+  background-position:
+    100% 61%;
+}
+
+
+/*
+================================================
+FILA 3
+================================================
+*/
+
+/* ENSALADAS */
+
+.ensaladas .tarjeta{
+  aspect-ratio:1.35 / 1;
+
+  background-size:200% auto;
+
+  background-position:
+    0% 79%;
+}
+
+/* AGREGADOS */
+
+.agregados .tarjeta{
+  aspect-ratio:1.35 / 1;
+
+  background-size:200% auto;
+
+  background-position:
+    100% 79%;
+}
+
+
+/* INDICADOR */
+
+#indicador{
+  position:fixed;
+
+  left:50%;
+  bottom:18px;
+
+  transform:translateX(-50%);
+
+  z-index:100;
+
+  padding:8px 15px;
+
+  border-radius:25px;
+
+  background:rgba(0,0,0,.72);
+
+  color:white;
+
+  font-size:14px;
+
+  white-space:nowrap;
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div id="carrusel">
+
+
+<!-- 1 ALMUERZO -->
+
+<section class="pagina almuerzo">
+  <div class="tarjeta"></div>
+</section>
+
+
+<!-- 2 PICOTEO -->
+
+<section class="pagina picoteo">
+  <div class="tarjeta"></div>
+</section>
+
+
+<!-- 3 PARRILLA -->
+
+<section class="pagina parrilla">
+  <div class="tarjeta"></div>
+</section>
+
+
+<!-- 4 BEBIDAS -->
+
+<section class="pagina bebidas">
+  <div class="tarjeta"></div>
+</section>
+
+
+<!-- 5 PARA LA GARGANTA -->
+
+<section class="pagina garganta">
+  <div class="tarjeta"></div>
+</section>
+
+
+<!-- 6 DESAYUNO -->
+
+<section class="pagina desayuno">
+  <div class="tarjeta"></div>
+</section>
+
+
+<!-- 7 ENSALADAS -->
+
+<section class="pagina ensaladas">
+  <div class="tarjeta"></div>
+</section>
+
+
+<!-- 8 AGREGADOS -->
+
+<section class="pagina agregados">
+  <div class="tarjeta"></div>
+</section>
+
+
+</div>
+
+
+<div id="indicador">
+Almuerzo • 1/8
+</div>
+
+
+<script>
+
+const carrusel =
+document.getElementById("carrusel");
+
+const indicador =
+document.getElementById("indicador");
+
+
+const nombres = [
+
+  "Almuerzo",
+  "Picoteo",
+  "Parrilla",
+  "Bebidas",
+  "Para la garganta",
+  "Desayuno",
+  "Ensaladas",
+  "Agregados"
+
+];
+
+
+function actualizar(){
+
+  const ancho =
+  carrusel.clientWidth;
+
+  const numero =
+  Math.round(
+    carrusel.scrollLeft / ancho
+  );
+
+  indicador.textContent =
+  nombres[numero] +
+  " • " +
+  (numero + 1) +
+  "/8";
+
+}
+
+
+carrusel.addEventListener(
+  "scroll",
+  actualizar
+);
+
+
+window.addEventListener(
+  "resize",
+  actualizar
+);
+
+</script>
+
+
+</body>
+</html>
