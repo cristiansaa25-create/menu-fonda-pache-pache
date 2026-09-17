@@ -113,18 +113,12 @@ button{
 }
 
 @media(max-width:500px){
-
     .producto{
         align-items:flex-start;
     }
 
     .acciones{
         flex-direction:column;
-    }
-
-    .editar,
-    .eliminar{
-        padding:9px 10px;
     }
 }
 </style>
@@ -136,7 +130,6 @@ button{
 
 <h1>Administrador</h1>
 <div class="subtitulo">Fonda Pache Pache</div>
-
 
 <div id="login">
 
@@ -204,7 +197,6 @@ button{
 
 </div>
 
-
 <div id="mensaje"></div>
 
 </div>
@@ -217,7 +209,6 @@ import {
     auth
 } from "./firebase-config.js";
 
-
 import {
     collection,
     addDoc,
@@ -227,7 +218,6 @@ import {
     onSnapshot,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
 
 import {
     signInWithEmailAndPassword,
@@ -332,6 +322,11 @@ document.getElementById("btnGuardar")
             collection(db,"menu"),
             {
                 nombre:nombreProducto,
+
+                /* Al crearlo, el nombre original
+                   es igual al nombre visible */
+                nombreOriginal:nombreProducto,
+
                 precio:precioProducto,
                 categoria:categoria.value,
                 creado:serverTimestamp()
@@ -411,7 +406,7 @@ onSnapshot(
             acciones.className = "acciones";
 
 
-            /* EDITAR PRECIO */
+            /* EDITAR NOMBRE Y PRECIO */
 
             const botonEditar =
                 document.createElement("button");
@@ -424,10 +419,32 @@ onSnapshot(
                 "click",
                 async () => {
 
+                    const nuevoNombre =
+                        window.prompt(
+                            "Nombre del producto:",
+                            datos.nombre || ""
+                        );
+
+                    if(nuevoNombre === null){
+                        return;
+                    }
+
+                    const nombreLimpio =
+                        nuevoNombre.trim();
+
+                    if(!nombreLimpio){
+
+                        mensaje.textContent =
+                            "El nombre no puede quedar vacío.";
+
+                        return;
+                    }
+
+
                     const nuevoPrecio =
                         window.prompt(
-                            "Nuevo precio para " +
-                            (datos.nombre || "producto") +
+                            "Precio de " +
+                            nombreLimpio +
                             ":",
                             datos.precio || 0
                         );
@@ -457,6 +474,22 @@ onSnapshot(
                     }
 
 
+                    /*
+                    MUY IMPORTANTE:
+
+                    Los productos que ya existían antes
+                    no tienen nombreOriginal.
+
+                    En su primera edición guardamos como
+                    nombreOriginal el nombre que tenían
+                    originalmente.
+                    */
+
+                    const nombreOriginal =
+                        datos.nombreOriginal ||
+                        datos.nombre;
+
+
                     try{
 
                         await updateDoc(
@@ -466,19 +499,21 @@ onSnapshot(
                                 documento.id
                             ),
                             {
+                                nombre:nombreLimpio,
+                                nombreOriginal:nombreOriginal,
                                 precio:precioNumero
                             }
                         );
 
                         mensaje.textContent =
-                            "Precio actualizado correctamente.";
+                            "Nombre y precio actualizados correctamente.";
 
                     }catch(error){
 
                         console.error(error);
 
                         mensaje.textContent =
-                            "No se pudo actualizar el precio.";
+                            "No se pudo actualizar el producto.";
                     }
 
                 }
