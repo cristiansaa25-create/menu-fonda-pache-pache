@@ -166,8 +166,9 @@
         mostrarPrecios(productos);
       },
       error => {
-        console.error(error);
-        estado.textContent = "No se pudo cargar los precios";
+  console.error(error);
+  estado.textContent = "ERROR: " + error.code + " - " + error.message;
+}
       }
     );
   </script>
