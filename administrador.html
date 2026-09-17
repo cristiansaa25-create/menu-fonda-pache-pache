@@ -25,6 +25,13 @@ body{
 
 h1{
     text-align:center;
+    margin-bottom:5px;
+}
+
+.subtitulo{
+    text-align:center;
+    font-size:20px;
+    margin-bottom:25px;
 }
 
 input,select,button{
@@ -34,57 +41,91 @@ input,select,button{
     margin:7px 0;
     font-size:16px;
     border-radius:8px;
-}
-
-input,select{
     border:1px solid #bbb;
 }
 
 button{
-    border:0;
-    background:#198754;
-    color:white;
+    border:none;
     font-weight:bold;
     cursor:pointer;
 }
 
-button:active{
-    opacity:.8;
+#btnIngresar,
+#btnGuardar{
+    background:#198f55;
+    color:white;
 }
 
 #btnSalir{
-    background:#555;
-}
-
-.producto{
-    background:#f2f2f2;
-    padding:12px;
-    margin:8px 0;
-    border-radius:8px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-}
-
-.producto-info{
-    flex:1;
-}
-
-.eliminar{
-    background:#c62828;
-    width:auto;
-    padding:8px 12px;
+    background:#5b5b5b;
+    color:white;
 }
 
 .oculto{
     display:none;
 }
 
+.producto{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#f1f1f1;
+    padding:12px;
+    margin:10px 0;
+    border-radius:10px;
+}
+
+.info{
+    flex:1;
+    min-width:0;
+}
+
+.nombreProducto{
+    font-weight:bold;
+    font-size:17px;
+}
+
+.acciones{
+    display:flex;
+    gap:6px;
+}
+
+.editar,
+.eliminar{
+    width:auto;
+    margin:0;
+    padding:10px 12px;
+    color:white;
+}
+
+.editar{
+    background:#e59a16;
+}
+
+.eliminar{
+    background:#d32626;
+}
+
 #mensaje{
     text-align:center;
-    margin-top:12px;
     font-weight:bold;
+    margin-top:15px;
+}
+
+@media(max-width:500px){
+
+    .producto{
+        align-items:flex-start;
+    }
+
+    .acciones{
+        flex-direction:column;
+    }
+
+    .editar,
+    .eliminar{
+        padding:9px 10px;
+    }
 }
 </style>
 </head>
@@ -94,64 +135,75 @@ button:active{
 <div class="contenedor">
 
 <h1>Administrador</h1>
-<p style="text-align:center">Fonda Pache Pache</p>
+<div class="subtitulo">Fonda Pache Pache</div>
+
 
 <div id="login">
 
-<input
-    id="email"
-    type="email"
-    placeholder="Correo administrador">
+    <input
+        id="email"
+        type="email"
+        placeholder="Correo electrónico"
+        autocomplete="username"
+    >
 
-<input
-    id="password"
-    type="password"
-    placeholder="Contraseña">
+    <input
+        id="password"
+        type="password"
+        placeholder="Contraseña"
+        autocomplete="current-password"
+    >
 
-<button id="btnIngresar">
-    Ingresar
-</button>
+    <button id="btnIngresar">
+        Ingresar
+    </button>
 
 </div>
 
 
 <div id="panel" class="oculto">
 
-<button id="btnSalir">
-    Cerrar sesión
-</button>
+    <button id="btnSalir">
+        Cerrar sesión
+    </button>
 
-<h3>Agregar producto</h3>
+    <h2>Agregar producto</h2>
 
-<select id="categoria">
-    <option value="Almuerzo">Almuerzo</option>
-    <option value="Picoteo">Picoteo</option>
-    <option value="Parrilla">Parrilla</option>
-    <option value="Bebidas">Bebidas</option>
-    <option value="Para la garganta">Para la garganta</option>
-    <option value="Desayuno">Desayuno</option>
-</select>
+    <select id="categoria">
+        <option value="Almuerzo">Almuerzo</option>
+        <option value="Picoteo">Picoteo</option>
+        <option value="Parrilla">Parrilla</option>
+        <option value="Bebidas">Bebidas</option>
+        <option value="Para la garganta">Para la garganta</option>
+        <option value="Desayuno">Desayuno</option>
+        <option value="Ensaladas">Ensaladas</option>
+        <option value="Agregados">Agregados</option>
+    </select>
 
-<input
-    id="nombre"
-    type="text"
-    placeholder="Nombre del producto">
+    <input
+        id="nombre"
+        type="text"
+        placeholder="Nombre del producto"
+    >
 
-<input
-    id="precio"
-    type="number"
-    min="0"
-    placeholder="Precio (ej: 3500)">
+    <input
+        id="precio"
+        type="number"
+        inputmode="numeric"
+        min="0"
+        placeholder="Precio (ej: 3500)"
+    >
 
-<button id="btnGuardar">
-    Guardar producto
-</button>
+    <button id="btnGuardar">
+        Guardar producto
+    </button>
 
-<h3>Productos guardados</h3>
+    <h2>Productos guardados</h2>
 
-<div id="productos"></div>
+    <div id="productos"></div>
 
 </div>
+
 
 <div id="mensaje"></div>
 
@@ -160,24 +212,28 @@ button:active{
 
 <script type="module">
 
-import { auth, db } from "./firebase-config.js";
+import {
+    db,
+    auth
+} from "./firebase-config.js";
+
+
+import {
+    collection,
+    addDoc,
+    deleteDoc,
+    updateDoc,
+    doc,
+    onSnapshot,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
 
 import {
     signInWithEmailAndPassword,
     signOut,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
-
-import {
-    collection,
-    addDoc,
-    deleteDoc,
-    doc,
-    onSnapshot,
-    serverTimestamp,
-    query,
-    orderBy
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 
 const login = document.getElementById("login");
@@ -199,7 +255,7 @@ document.getElementById("btnIngresar")
 
     mensaje.textContent = "Ingresando...";
 
-    try {
+    try{
 
         await signInWithEmailAndPassword(
             auth,
@@ -209,12 +265,12 @@ document.getElementById("btnIngresar")
 
         mensaje.textContent = "";
 
-    } catch(error) {
+    }catch(error){
 
         console.error(error);
 
         mensaje.textContent =
-        "No se pudo iniciar sesión. Revisa correo y contraseña.";
+            "No se pudo iniciar sesión. Revisa correo y contraseña.";
     }
 
 });
@@ -254,20 +310,23 @@ document.getElementById("btnGuardar")
     if(!nombreProducto){
 
         mensaje.textContent =
-        "Escribe el nombre del producto.";
+            "Escribe el nombre del producto.";
 
         return;
     }
 
-    if(!Number.isFinite(precioProducto) || precioProducto < 0){
+    if(
+        !Number.isFinite(precioProducto) ||
+        precioProducto < 0
+    ){
 
         mensaje.textContent =
-        "Ingresa un precio válido.";
+            "Ingresa un precio válido.";
 
         return;
     }
 
-    try {
+    try{
 
         await addDoc(
             collection(db,"menu"),
@@ -283,102 +342,175 @@ document.getElementById("btnGuardar")
         precio.value = "";
 
         mensaje.textContent =
-        "Producto guardado correctamente.";
+            "Producto guardado correctamente.";
 
-    } catch(error){
+    }catch(error){
 
         console.error(error);
 
         mensaje.textContent =
-        "Error al guardar el producto.";
+            "Error al guardar el producto.";
     }
 
 });
 
 
-const consulta = query(
-    collection(db,"menu"),
-    orderBy("creado","desc")
-);
-
-
 onSnapshot(
-    consulta,
+    collection(db,"menu"),
 
     snapshot => {
 
         productos.innerHTML = "";
-
-        if(snapshot.empty){
-
-            productos.innerHTML =
-            "<p>No hay productos guardados.</p>";
-
-            return;
-        }
 
         snapshot.forEach(documento => {
 
             const datos = documento.data();
 
             const fila =
-            document.createElement("div");
+                document.createElement("div");
 
             fila.className = "producto";
 
 
             const info =
-            document.createElement("div");
+                document.createElement("div");
 
-            info.className = "producto-info";
+            info.className = "info";
+
 
             const nombreElemento =
-            document.createElement("strong");
+                document.createElement("div");
+
+            nombreElemento.className =
+                "nombreProducto";
 
             nombreElemento.textContent =
-            datos.nombre || "Sin nombre";
+                datos.nombre || "Sin nombre";
 
 
             const detalle =
-            document.createElement("div");
+                document.createElement("div");
 
             const precioFormateado =
-            Number(datos.precio || 0)
-            .toLocaleString("es-CL");
+                Number(datos.precio || 0)
+                .toLocaleString("es-CL");
 
             detalle.textContent =
-            (datos.categoria || "") +
-            " — $" +
-            precioFormateado;
+                (datos.categoria || "") +
+                " — $" +
+                precioFormateado;
 
 
             info.appendChild(nombreElemento);
-            info.appendChild(document.createElement("br"));
             info.appendChild(detalle);
 
 
-            const boton =
-            document.createElement("button");
+            const acciones =
+                document.createElement("div");
 
-            boton.className = "eliminar";
-            boton.textContent = "Eliminar";
+            acciones.className = "acciones";
 
-            boton.addEventListener(
+
+            /* EDITAR PRECIO */
+
+            const botonEditar =
+                document.createElement("button");
+
+            botonEditar.className = "editar";
+            botonEditar.textContent = "Editar";
+
+
+            botonEditar.addEventListener(
+                "click",
+                async () => {
+
+                    const nuevoPrecio =
+                        window.prompt(
+                            "Nuevo precio para " +
+                            (datos.nombre || "producto") +
+                            ":",
+                            datos.precio || 0
+                        );
+
+                    if(nuevoPrecio === null){
+                        return;
+                    }
+
+
+                    const precioNumero =
+                        Number(
+                            String(nuevoPrecio)
+                            .replace(/\./g,"")
+                            .replace(",",".")
+                        );
+
+
+                    if(
+                        !Number.isFinite(precioNumero) ||
+                        precioNumero < 0
+                    ){
+
+                        mensaje.textContent =
+                            "Ingresa un precio válido.";
+
+                        return;
+                    }
+
+
+                    try{
+
+                        await updateDoc(
+                            doc(
+                                db,
+                                "menu",
+                                documento.id
+                            ),
+                            {
+                                precio:precioNumero
+                            }
+                        );
+
+                        mensaje.textContent =
+                            "Precio actualizado correctamente.";
+
+                    }catch(error){
+
+                        console.error(error);
+
+                        mensaje.textContent =
+                            "No se pudo actualizar el precio.";
+                    }
+
+                }
+            );
+
+
+            /* ELIMINAR */
+
+            const botonEliminar =
+                document.createElement("button");
+
+            botonEliminar.className = "eliminar";
+            botonEliminar.textContent = "Eliminar";
+
+
+            botonEliminar.addEventListener(
                 "click",
                 async () => {
 
                     const confirmar =
-                    window.confirm(
-                        "¿Eliminar " +
-                        (datos.nombre || "este producto") +
-                        "?"
-                    );
+                        window.confirm(
+                            "¿Eliminar " +
+                            (datos.nombre || "este producto") +
+                            "?"
+                        );
 
                     if(!confirmar){
                         return;
                     }
 
-                    try {
+
+                    try{
 
                         await deleteDoc(
                             doc(
@@ -389,22 +521,25 @@ onSnapshot(
                         );
 
                         mensaje.textContent =
-                        "Producto eliminado.";
+                            "Producto eliminado.";
 
-                    } catch(error){
+                    }catch(error){
 
                         console.error(error);
 
                         mensaje.textContent =
-                        "No se pudo eliminar.";
+                            "No se pudo eliminar.";
                     }
 
                 }
             );
 
 
+            acciones.appendChild(botonEditar);
+            acciones.appendChild(botonEliminar);
+
             fila.appendChild(info);
-            fila.appendChild(boton);
+            fila.appendChild(acciones);
 
             productos.appendChild(fila);
 
@@ -417,7 +552,7 @@ onSnapshot(
         console.error(error);
 
         mensaje.textContent =
-        "No se pudieron cargar los productos.";
+            "No se pudieron cargar los productos.";
 
     }
 );
