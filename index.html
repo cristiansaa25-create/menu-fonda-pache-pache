@@ -4,175 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fonda Pache Pache</title>
+
   <style>
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: #2b160d; }
-    body { min-height: 100vh; display: flex; justify-content: center; }
-
-    #menu { position: relative; width: 100%; max-width: 1024px; margin: 0 auto; }
-    #menuImagen { display: block; width: 100%; height: auto; }
-    #capaPrecios { position: absolute; inset: 0; pointer-events: none; }
-
-    .precio {
-      position: absolute;
-      transform: translate(-100%, -50%);
-      font-family: Arial, sans-serif;
-      font-weight: 900;
-      font-size: clamp(9px, 1.7vw, 16px);
-      color: #a62019;
-      background: rgba(255, 248, 231, 0.94);
-      padding: 2px 4px;
-      border-radius: 4px;
-      white-space: nowrap;
-      line-height: 1;
-      z-index: 20;
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #2b160d;
     }
 
-    #estado {
-      position: fixed;
-      bottom: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #fff8e7;
-      color: #5b321d;
-      padding: 6px 10px;
-      border-radius: 20px;
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-      z-index: 20;
+    body {
+      display: flex;
+      justify-content: center;
     }
-    #estado.oculto { display: none; }
+
+    img {
+      display: block;
+      width: 100%;
+      max-width: 1024px;
+      height: auto;
+    }
   </style>
 </head>
+
 <body>
-  <div id="menu">
-    <img id="menuImagen" src="menu.png" alt="Menú Fonda Pache Pache">
-    <div id="capaPrecios"></div>
-  </div>
-
-  <div id="estado">Cargando precios...</div>
-
-  <document.getElementById("estado").textContent = "MODULO INICIADO";>
-    import { db } from "./firebase-config.js";
-    import {
-      collection,
-      onSnapshot
-    } const capa = document.getElementById("capaPrecios");
-const estado = document.getElementById("estado");
-
-estado.textContent = "JavaScript OK";
-
-const puestos = {
-
-      "pollo asado":[21,43.1],
-      "cazuela":[44,30.5],
-      "costillar":[44,33],
-      "prieta":[44,35.5],
-      "mechada":[44,38],
-      "cocimiento":[44,40.5],
-      "charquicano":[44,40.5],
-      "pernil":[44,43],
-      "lomo vetado":[44,45.5],
-      "menu niño":[44,48],
-
-      "completo":[64,43.1],
-      "completos":[64,43.1],
-      "churrasco":[64,44.6],
-      "salchipapa":[64,46.1],
-      "papas fritas":[64,47.6],
-      "rollo de mano":[64,49.1],
-      "handroll":[64,49.1],
-      "empanada de queso":[64,50.6],
-      "media luna":[64,52.1],
-      "chorillana":[64,53.6],
-      "chorrillana":[64,53.6],
-      "sandwich de lomito":[64,55.1],
-
-      "anticucho":[44,55],
-      "choripan":[44,57.5],
-
-      "terremoto niño":[93,55],
-      "bebida lata":[93,57.5],
-      "agua botella":[93,60],
-      "jugo botella":[93,62.5],
-      "vino 3/4":[93,65],
-      "whisky + 4 latas":[93,67.5],
-      "pisco + 4 latas":[93,70],
-
-      "terremoto":[44,65],
-      "michelada":[44,67.5],
-      "cerveza lata":[44,70],
-      "cerveza":[44,72.5],
-      "whisky":[44,75],
-
-      "te":[93,77.5],
-      "cafeteria":[93,80],
-      "cafe":[93,80]
-    };
-
-    function normalizar(texto) {
-      return String(texto || "")
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .trim()
-        .replace(/\s+/g, " ");
-    }
-
-    function formatoPrecio(valor) {
-      const numero = Number(valor);
-      if (!Number.isFinite(numero)) return "";
-      return "$" + Math.round(numero).toLocaleString("es-CL");
-    }
-
-    function mostrarPrecios(productos) {
-      capa.innerHTML = "";
-      let encontrados = 0;
-
-      productos.forEach(producto => {
-        const nombre = normalizar(producto.nombre);
-        const posicion = puestos[nombre];
-
-        if (!posicion) return;
-        if (producto.precio === undefined ||
-            producto.precio === null ||
-            producto.precio === "") return;
-
-        const precio = document.createElement("div");
-        precio.className = "precio";
-        precio.textContent = formatoPrecio(producto.precio);
-        precio.style.left = posicion[0] + "%";
-        precio.style.top = posicion[1] + "%";
-        capa.appendChild(precio);
-        encontrados++;
-      });
-
-      if (encontrados > 0) {
-        estado.classList.remove("oculto");
-      } else {
-        estado.textContent = "Menú cargado - esperando precios";
-      }
-    }
-
-    onSnapshot(
-      collection(db, "menu"),
-      snapshot => {
-        const productos = [];
-        snapshot.forEach(documento => {
-          productos.push({
-            id: documento.id,
-            ...documento.data()
-          });
-        });
-        estado.textContent = "Firebase: " + JSON.stringify(productos);
-mostrarPrecios(productos);
-      },
-      error => {
-  console.error(error);
-  estado.textContent = "ERROR: " + error.code + " - " + error.message;
-}
-  
-    );
-  </script>
+  <img src="menu.png" alt="Menú Fonda Pache Pache">
 </body>
 </html>
