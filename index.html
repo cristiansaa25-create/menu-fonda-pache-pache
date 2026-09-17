@@ -148,7 +148,7 @@ const puestos = {
       });
 
       if (encontrados > 0) {
-        estado.classList.add("oculto");
+        estado.classList.remove("oculto");
       } else {
         estado.textContent = "Menú cargado - esperando precios";
       }
@@ -164,7 +164,8 @@ const puestos = {
             ...documento.data()
           });
         });
-        mostrarPrecios(productos);
+        estado.textContent = "Firebase: " + JSON.stringify(productos);
+mostrarPrecios(productos);
       },
       error => {
   console.error(error);
