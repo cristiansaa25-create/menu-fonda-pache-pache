@@ -3,10 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Fonda Pache Pache</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+  box-sizing:border-box;
+}
 
 html,body{
   margin:0;
@@ -28,16 +32,20 @@ html,body{
   scrollbar-width:none;
 }
 
-#menu::-webkit-scrollbar{display:none}
+#menu::-webkit-scrollbar{
+  display:none;
+}
 
 .pagina{
   min-width:100%;
   width:100%;
   height:100dvh;
   flex:0 0 100%;
+
   display:flex;
   justify-content:center;
   align-items:center;
+
   scroll-snap-align:start;
   scroll-snap-stop:always;
 }
@@ -56,371 +64,929 @@ html,body{
   object-fit:fill;
 }
 
-/* NOMBRE DINÁMICO */
-.nombre-dinamico{
-  position:absolute;
-  left:8%;
-  width:52%;
-  transform:translateY(-50%);
-  z-index:19;
 
-  /* cubre el nombre que viene en la imagen */
-  background:rgba(247,239,210,.96);
-  padding:3px 4px;
+/* =========================
+   NOMBRE MODIFICADO
+   ========================= */
+
+.nombre-dinamico{
+
+  position:absolute;
+
+  left:7.5%;
+  width:53%;
+  height:2.9%;
+
+  transform:translateY(-50%);
+
+  z-index:30;
+
+  display:flex;
+  align-items:center;
+
+  /*
+  Fondo parecido al papel
+  para tapar el nombre antiguo
+  */
+  background:#f3e5bd;
 
   color:#111;
-  font-family:Georgia,"Times New Roman",serif;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-weight:bold;
-  font-size:clamp(13px,2.05vh,21px);
-  line-height:1.05;
+
+  font-size:
+    clamp(14px,2.25vh,23px);
+
+  line-height:1;
+
   white-space:nowrap;
+
+  padding-left:1%;
 }
 
-/* PRECIO DINÁMICO */
+
+/* =========================
+   PRECIOS
+   ========================= */
+
 .precio{
+
   position:absolute;
+
   left:61%;
   width:31%;
+
   transform:translateY(-50%);
+
   text-align:right;
+
   color:#111;
-  font-family:Georgia,"Times New Roman",serif;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-weight:bold;
-  font-size:clamp(14px,2.25vh,23px);
+
+  font-size:
+    clamp(14px,2.25vh,23px);
+
   line-height:1;
+
   white-space:nowrap;
+
   z-index:20;
+
   text-shadow:
     0 1px 2px #fff,
     0 0 3px #fff;
 }
 
+
+/* =========================
+   CONTADOR DE PÁGINAS
+   ========================= */
+
 #contador{
+
   position:fixed;
+
   bottom:18px;
   left:50%;
+
   transform:translateX(-50%);
-  background:rgba(0,0,0,.72);
+
+  background:
+    rgba(0,0,0,.72);
+
   color:white;
+
   padding:7px 14px;
+
   border-radius:20px;
-  font-family:Arial,sans-serif;
+
+  font-family:
+    Arial,
+    sans-serif;
+
   font-size:14px;
+
   z-index:100;
+
   white-space:nowrap;
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <div id="menu">
 
-<div class="pagina">
-  <div class="hoja" data-categoria="Almuerzo">
-    <img src="01-almuerzo.png" alt="Almuerzo">
-  </div>
-</div>
+
+<!-- 1 ALMUERZO -->
 
 <div class="pagina">
-  <div class="hoja" data-categoria="Picoteo">
-    <img src="02-picoteo.png" alt="Picoteo">
+
+  <div
+    class="hoja"
+    data-categoria="Almuerzo">
+
+    <img
+      src="01-almuerzo.png"
+      alt="Almuerzo">
+
   </div>
+
 </div>
+
+
+<!-- 2 PICOTEO -->
 
 <div class="pagina">
-  <div class="hoja" data-categoria="Parrilla">
-    <img src="03-parrilla.png" alt="Parrilla">
+
+  <div
+    class="hoja"
+    data-categoria="Picoteo">
+
+    <img
+      src="02-picoteo.png"
+      alt="Picoteo">
+
   </div>
+
 </div>
+
+
+<!-- 3 PARRILLA -->
 
 <div class="pagina">
-  <div class="hoja" data-categoria="Bebidas">
-    <img src="04-bebidas.png" alt="Bebidas">
+
+  <div
+    class="hoja"
+    data-categoria="Parrilla">
+
+    <img
+      src="03-parrilla.png"
+      alt="Parrilla">
+
   </div>
+
 </div>
+
+
+<!-- 4 BEBIDAS -->
 
 <div class="pagina">
-  <div class="hoja" data-categoria="Para la garganta">
-    <img src="05-para-la-garganta.png" alt="Para la garganta">
+
+  <div
+    class="hoja"
+    data-categoria="Bebidas">
+
+    <img
+      src="04-bebidas.png"
+      alt="Bebidas">
+
   </div>
+
 </div>
+
+
+<!-- 5 PARA LA GARGANTA -->
 
 <div class="pagina">
-  <div class="hoja" data-categoria="Desayuno">
-    <img src="06-desayuno.png" alt="Desayuno">
+
+  <div
+    class="hoja"
+    data-categoria="Para la garganta">
+
+    <img
+      src="05-para-la-garganta.png"
+      alt="Para la garganta">
+
   </div>
+
 </div>
+
+
+<!-- 6 DESAYUNO -->
 
 <div class="pagina">
-  <div class="hoja" data-categoria="Ensaladas">
-    <img src="07-ensaladas.png" alt="Ensaladas">
+
+  <div
+    class="hoja"
+    data-categoria="Desayuno">
+
+    <img
+      src="06-desayuno.png"
+      alt="Desayuno">
+
   </div>
+
 </div>
+
+
+<!-- 7 ENSALADAS -->
 
 <div class="pagina">
-  <div class="hoja" data-categoria="Agregados">
-    <img src="08-agregados.png" alt="Agregados">
+
+  <div
+    class="hoja"
+    data-categoria="Ensaladas">
+
+    <img
+      src="07-ensaladas.png"
+      alt="Ensaladas">
+
   </div>
-</div>
 
 </div>
 
-<div id="contador">Almuerzo • 1/8</div>
+
+<!-- 8 AGREGADOS -->
+
+<div class="pagina">
+
+  <div
+    class="hoja"
+    data-categoria="Agregados">
+
+    <img
+      src="08-agregados.png"
+      alt="Agregados">
+
+  </div>
+
+</div>
+
+
+</div>
+
+
+<div id="contador">
+Almuerzo • 1/8
+</div>
+
+
+<!-- =========================
+     DESLIZAMIENTO
+     ========================= -->
 
 <script>
-const menu=document.getElementById("menu");
-const contador=document.getElementById("contador");
+
+const menu =
+  document.getElementById("menu");
+
+const contador =
+  document.getElementById("contador");
+
 
 const nombres=[
+
   "Almuerzo",
+
   "Picoteo",
+
   "Parrilla",
+
   "Bebidas",
+
   "Para la garganta",
+
   "Desayuno",
+
   "Ensaladas",
+
   "Agregados"
+
 ];
 
+
 function actualizar(){
-  const pagina=Math.round(
-    menu.scrollLeft/menu.clientWidth
-  );
 
-  contador.textContent=
-    nombres[pagina]+" • "+(pagina+1)+"/8";
-}
-
-menu.addEventListener("scroll",actualizar);
-</script>
-
-<script type="module">
-
-import {initializeApp}
-from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-
-import {
-  getFirestore,
-  collection,
-  onSnapshot
-}
-from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
-const firebaseConfig={
-  apiKey:"AIzaSyAUNLLg-qxtfA4IbWXWv6GP8iTnoYzmBjA",
-  authDomain:"fonda-pache-pache-menu.firebaseapp.com",
-  projectId:"fonda-pache-pache-menu",
-  storageBucket:"fonda-pache-pache-menu.firebasestorage.app",
-  messagingSenderId:"385605487668",
-  appId:"1:385605487668:web:dad962c8a71e39f7bece61"
-};
-
-const app=initializeApp(firebaseConfig);
-const db=getFirestore(app);
-
-/* POSICIONES FIJAS */
-
-const posiciones={
-
-"Almuerzo":{
- "Pollo asado":50.6,
- "Cazuela":54.1,
- "Costillar":57.6,
- "Prieta":61.0,
- "Mechada":64.5,
- "Cocimiento":68.0,
- "Pernil":71.5,
- "Lomo vetado":75.0,
- "Menú niño":78.5
-},
-
-"Picoteo":{
- "Completos":53.7,
- "Churrasco":57.0,
- "Salchipapa":60.2,
- "Papas fritas":63.3,
- "Handroll":66.5,
- "Empanada de queso":69.8,
- "Media luna - 3 x 2000":73.0,
- "Chorrillana":76.3,
- "Sándwich de lomito":79.5
-},
-
-"Parrilla":{
- "Anticucho":66.0,
- "Choripán":69.8
-},
-
-"Bebidas":{
- "Terremoto niño":55.0,
- "Bebida lata":58.8,
- "Agua botella":62.6,
- "Jugo botella":66.4,
- "Vino 3/4":70.2,
- "Whisky + 4 latas":74.0,
- "Pisco + 4 latas":77.8
-},
-
-"Para la garganta":{
- "Terremoto":62.1,
- "Michelada":66.0,
- "Cerveza lata":69.9,
- "Cerveza":73.8,
- "Whisky":77.7
-},
-
-"Desayuno":{
- "Té":64.0,
- "Café":68.0
-},
-
-"Ensaladas":{
- "Chilena":68.2,
- "Tomate solo":72.1
-},
-
-"Agregados":{
- "Arroz":66.4,
- "Papa mayo":70.2,
- "Papa cocida":74.0,
- "Papa frita":77.8
-}
-
-};
-
-function normalizar(texto){
- return String(texto||"")
- .normalize("NFD")
- .replace(/[\u0300-\u036f]/g,"")
- .replace(/[–—]/g,"-")
- .replace(/\s+/g," ")
- .trim()
- .toLowerCase();
-}
-
-function precioCLP(valor){
- const numero=Number(valor);
-
- if(!Number.isFinite(numero)){
-   return "";
- }
-
- return "$"+
- Math.round(numero).toLocaleString("es-CL");
-}
-
-function pintarProducto(datos){
-
- const categoriaEncontrada=
- Object.keys(posiciones).find(
-   categoria=>
-   normalizar(categoria)===
-   normalizar(datos.categoria)
- );
-
- if(!categoriaEncontrada)return;
-
- /*
- nombreOriginal mantiene la posición
- aunque cambiemos el nombre visible.
- */
- const nombreReferencia=
-   datos.nombreOriginal || datos.nombre;
-
- const productoEncontrado=
- Object.keys(
-   posiciones[categoriaEncontrada]
- ).find(
-   producto=>
-   normalizar(producto)===
-   normalizar(nombreReferencia)
- );
-
- if(!productoEncontrado)return;
-
- const hoja=
- [...document.querySelectorAll(".hoja")]
- .find(
-   elemento=>
-   normalizar(elemento.dataset.categoria)===
-   normalizar(categoriaEncontrada)
- );
-
- if(!hoja)return;
-
- const posicion=
-   posiciones[categoriaEncontrada]
-   [productoEncontrado];
-
- /* NOMBRE */
-
- const nombreNuevo=
-   document.createElement("div");
-
- nombreNuevo.className=
-   "nombre-dinamico";
-
- nombreNuevo.style.top=
-   posicion+"%";
-
- nombreNuevo.textContent=
-   datos.nombre || productoEncontrado;
-
- hoja.appendChild(nombreNuevo);
+  const pagina =
+    Math.round(
+      menu.scrollLeft /
+      menu.clientWidth
+    );
 
 
- /* PRECIO */
+  contador.textContent =
 
- const precio=
-   document.createElement("div");
+    nombres[pagina] +
 
- precio.className="precio";
+    " • " +
 
- precio.style.top=
-   posicion+"%";
+    (pagina+1) +
 
- precio.textContent=
-   precioCLP(datos.precio);
+    "/8";
 
- hoja.appendChild(precio);
 }
 
 
-/* FIREBASE EN TIEMPO REAL */
-
-onSnapshot(
- collection(db,"menu"),
-
- snapshot=>{
-
-   document
-   .querySelectorAll(
-     ".precio,.nombre-dinamico"
-   )
-   .forEach(
-     elemento=>elemento.remove()
-   );
-
-   snapshot.forEach(
-     documento=>{
-       pintarProducto(
-         documento.data()
-       );
-     }
-   );
-
- },
-
- error=>{
-   console.error(
-     "Error leyendo Firestore:",
-     error
-   );
- }
+menu.addEventListener(
+  "scroll",
+  actualizar
 );
 
 </script>
+
+
+
+<!-- =========================
+     FIREBASE
+     ========================= -->
+
+<script type="module">
+
+
+import {
+  initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+
+import {
+
+  getFirestore,
+
+  collection,
+
+  onSnapshot
+
+}
+from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+
+const firebaseConfig={
+
+  apiKey:
+  "AIzaSyAUNLLg-qxtfA4IbWXWv6GP8iTnoYzmBjA",
+
+  authDomain:
+  "fonda-pache-pache-menu.firebaseapp.com",
+
+  projectId:
+  "fonda-pache-pache-menu",
+
+  storageBucket:
+  "fonda-pache-pache-menu.firebasestorage.app",
+
+  messagingSenderId:
+  "385605487668",
+
+  appId:
+  "1:385605487668:web:dad962c8a71e39f7bece61"
+
+};
+
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+
+const db =
+  getFirestore(app);
+
+
+
+/* ==================================
+   POSICIONES DE LOS PRODUCTOS
+   ================================== */
+
+
+const posiciones={
+
+
+"Almuerzo":{
+
+  "Pollo asado":50.6,
+
+  "Cazuela":54.1,
+
+  "Costillar":57.6,
+
+  "Prieta":61.0,
+
+  "Mechada":64.5,
+
+  "Cocimiento":68.0,
+
+  "Pernil":71.5,
+
+  "Lomo vetado":75.0,
+
+  "Menú niño":78.5
+
+},
+
+
+
+"Picoteo":{
+
+  "Completos":53.7,
+
+  "Churrasco":57.0,
+
+  "Salchipapa":60.2,
+
+  "Papas fritas":63.3,
+
+  "Handroll":66.5,
+
+  "Empanada de queso":69.8,
+
+  "Media luna - 3 x 2000":73.0,
+
+  "Chorrillana":76.3,
+
+  "Sándwich de lomito":79.5
+
+},
+
+
+
+"Parrilla":{
+
+  "Anticucho":66.0,
+
+  "Choripán":69.8
+
+},
+
+
+
+"Bebidas":{
+
+  "Terremoto niño":55.0,
+
+  "Bebida lata":58.8,
+
+  "Agua botella":62.6,
+
+  "Jugo botella":66.4,
+
+  "Vino 3/4":70.2,
+
+  "Whisky + 4 latas":74.0,
+
+  "Pisco + 4 latas":77.8
+
+},
+
+
+
+"Para la garganta":{
+
+  "Terremoto":62.1,
+
+  "Michelada":66.0,
+
+  "Cerveza lata":69.9,
+
+  "Cerveza":73.8,
+
+  "Whisky":77.7
+
+},
+
+
+
+"Desayuno":{
+
+  "Té":64.0,
+
+  "Café":68.0
+
+},
+
+
+
+"Ensaladas":{
+
+  "Chilena":68.2,
+
+  "Tomate solo":72.1
+
+},
+
+
+
+"Agregados":{
+
+  "Arroz":66.4,
+
+  "Papa mayo":70.2,
+
+  "Papa cocida":74.0,
+
+  "Papa frita":77.8
+
+}
+
+
+};
+
+
+
+/* ==================================
+   NORMALIZAR TEXTO
+   ================================== */
+
+
+function normalizar(texto){
+
+  return String(texto || "")
+
+    .normalize("NFD")
+
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+
+    .replace(
+      /[–—]/g,
+      "-"
+    )
+
+    .replace(
+      /\s+/g,
+      " "
+    )
+
+    .trim()
+
+    .toLowerCase();
+
+}
+
+
+
+/* ==================================
+   FORMATO PESOS CHILENOS
+   ================================== */
+
+
+function precioCLP(valor){
+
+  const numero =
+    Number(valor);
+
+
+  if(
+    !Number.isFinite(numero)
+  ){
+
+    return "";
+
+  }
+
+
+  return "$" +
+
+    Math.round(numero)
+
+    .toLocaleString(
+      "es-CL"
+    );
+
+}
+
+
+
+/* ==================================
+   PINTAR PRODUCTO
+   ================================== */
+
+
+function pintarProducto(datos){
+
+
+  /* BUSCAR CATEGORÍA */
+
+
+  const categoriaEncontrada =
+
+    Object.keys(posiciones)
+
+    .find(
+
+      categoria =>
+
+      normalizar(categoria) ===
+
+      normalizar(
+        datos.categoria
+      )
+
+    );
+
+
+  if(!categoriaEncontrada){
+
+    return;
+
+  }
+
+
+
+  /*
+  IMPORTANTE:
+
+  nombreOriginal sirve para
+  mantener la posición aunque
+  cambiemos el nombre visible.
+  */
+
+
+  const nombreReferencia =
+
+    datos.nombreOriginal ||
+
+    datos.nombre;
+
+
+
+  /* BUSCAR POSICIÓN ORIGINAL */
+
+
+  const productoEncontrado =
+
+    Object.keys(
+
+      posiciones[
+        categoriaEncontrada
+      ]
+
+    )
+
+    .find(
+
+      producto =>
+
+      normalizar(producto) ===
+
+      normalizar(
+        nombreReferencia
+      )
+
+    );
+
+
+  if(!productoEncontrado){
+
+    return;
+
+  }
+
+
+
+  /* BUSCAR LA HOJA */
+
+
+  const hoja =
+
+    [
+      ...document
+      .querySelectorAll(
+        ".hoja"
+      )
+    ]
+
+    .find(
+
+      elemento =>
+
+      normalizar(
+
+        elemento
+        .dataset
+        .categoria
+
+      )
+
+      ===
+
+      normalizar(
+        categoriaEncontrada
+      )
+
+    );
+
+
+  if(!hoja){
+
+    return;
+
+  }
+
+
+
+  const posicion =
+
+    posiciones[
+      categoriaEncontrada
+    ][
+      productoEncontrado
+    ];
+
+
+
+  /* ==================================
+     MOSTRAR NOMBRE NUEVO
+     ================================== */
+
+
+  const fueModificado =
+
+    datos.nombreOriginal &&
+
+    normalizar(
+      datos.nombre
+    )
+
+    !==
+
+    normalizar(
+      datos.nombreOriginal
+    );
+
+
+
+  if(fueModificado){
+
+
+    const nombreNuevo =
+
+      document
+      .createElement(
+        "div"
+      );
+
+
+    nombreNuevo.className =
+
+      "nombre-dinamico";
+
+
+    nombreNuevo.style.top =
+
+      posicion + "%";
+
+
+    nombreNuevo.textContent =
+
+      datos.nombre;
+
+
+    hoja.appendChild(
+      nombreNuevo
+    );
+
+
+  }
+
+
+
+  /* ==================================
+     MOSTRAR PRECIO
+     ================================== */
+
+
+  const precio =
+
+    document
+    .createElement(
+      "div"
+    );
+
+
+  precio.className =
+    "precio";
+
+
+  precio.style.top =
+
+    posicion + "%";
+
+
+  precio.textContent =
+
+    precioCLP(
+      datos.precio
+    );
+
+
+  hoja.appendChild(
+    precio
+  );
+
+
+}
+
+
+
+/* ==================================
+   LEER FIRESTORE EN TIEMPO REAL
+   ================================== */
+
+
+onSnapshot(
+
+  collection(
+    db,
+    "menu"
+  ),
+
+
+  snapshot => {
+
+
+    /*
+    BORRAR ELEMENTOS DINÁMICOS
+    ANTES DE VOLVER A PINTAR
+    */
+
+
+    document
+
+    .querySelectorAll(
+
+      ".precio, .nombre-dinamico"
+
+    )
+
+    .forEach(
+
+      elemento =>
+
+      elemento.remove()
+
+    );
+
+
+
+    /*
+    PINTAR TODOS LOS PRODUCTOS
+    */
+
+
+    snapshot.forEach(
+
+      documento => {
+
+
+        const datos =
+
+          documento.data();
+
+
+        pintarProducto(
+          datos
+        );
+
+
+      }
+
+    );
+
+
+  },
+
+
+  error => {
+
+
+    console.error(
+
+      "Error leyendo Firestore:",
+
+      error
+
+    );
+
+
+  }
+
+);
+
+
+</script>
+
 
 </body>
 </html>
