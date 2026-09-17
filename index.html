@@ -2,25 +2,274 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
 <title>Fonda Pache Pache</title>
 
 <style>
-html, body {
-    margin: 0;
-    padding: 0;
-    background: #2b160d;
+
+*{
+  box-sizing:border-box;
 }
 
-img {
-    display: block;
-    width: 100%;
-    height: auto;
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  height:100%;
+  background:#2b160d;
+  overflow:hidden;
 }
+
+/* CONTENEDOR DESLIZABLE */
+
+.carrusel{
+  width:100%;
+  height:100vh;
+
+  display:flex;
+
+  overflow-x:auto;
+  overflow-y:hidden;
+
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+
+  -webkit-overflow-scrolling:touch;
+}
+
+/* CADA PANTALLA */
+
+.pagina{
+  position:relative;
+
+  flex:0 0 100%;
+
+  width:100%;
+  height:100vh;
+
+  overflow:hidden;
+
+  scroll-snap-align:start;
+
+  background:#2b160d;
+}
+
+/* IMAGEN ORIGINAL */
+
+.pagina img{
+
+  position:absolute;
+
+  width:300%;
+  max-width:none;
+
+  height:auto;
+
+  left:0;
+
+  user-select:none;
+  pointer-events:none;
+}
+
+
+/* ============================= */
+/* FILA 1 */
+/* ============================= */
+
+/* ALMUERZO */
+
+.almuerzo img{
+  width:300%;
+  left:0%;
+  top:-50vw;
+}
+
+/* PICOTEO */
+
+.picoteo img{
+  width:300%;
+  left:-100%;
+  top:-50vw;
+}
+
+/* PARRILLA */
+
+.parrilla img{
+  width:300%;
+  left:-200%;
+  top:-50vw;
+}
+
+
+/* ============================= */
+/* FILA 2 */
+/* ============================= */
+
+/* BEBIDAS */
+
+.bebidas img{
+  width:300%;
+  left:0%;
+  top:-180vw;
+}
+
+/* PARA LA GARGANTA */
+
+.garganta img{
+  width:300%;
+  left:-100%;
+  top:-180vw;
+}
+
+/* DESAYUNO */
+
+.desayuno img{
+  width:300%;
+  left:-200%;
+  top:-180vw;
+}
+
+
+/* ============================= */
+/* FILA 3 */
+/* ============================= */
+
+/* ENSALADAS */
+
+.ensaladas img{
+  width:200%;
+  left:0%;
+  top:-305vw;
+}
+
+/* AGREGADOS */
+
+.agregados img{
+  width:200%;
+  left:-100%;
+  top:-305vw;
+}
+
+
+/* INDICADOR */
+
+.indicador{
+
+  position:fixed;
+
+  bottom:12px;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  background:rgba(0,0,0,.55);
+
+  color:white;
+
+  padding:7px 12px;
+
+  border-radius:20px;
+
+  font-family:Arial,sans-serif;
+
+  font-size:13px;
+
+  z-index:100;
+}
+
 </style>
 </head>
 
+
 <body>
-<img src="menu.png" alt="Menú Fonda Pache Pache">
-</body>
-</html>
+
+
+<div class="carrusel" id="carrusel">
+
+
+<!-- 1 ALMUERZO -->
+
+<section class="pagina almuerzo">
+<img src="menu.png">
+</section>
+
+
+<!-- 2 PICOTEO -->
+
+<section class="pagina picoteo">
+<img src="menu.png">
+</section>
+
+
+<!-- 3 PARRILLA -->
+
+<section class="pagina parrilla">
+<img src="menu.png">
+</section>
+
+
+<!-- 4 BEBIDAS -->
+
+<section class="pagina bebidas">
+<img src="menu.png">
+</section>
+
+
+<!-- 5 PARA LA GARGANTA -->
+
+<section class="pagina garganta">
+<img src="menu.png">
+</section>
+
+
+<!-- 6 DESAYUNO -->
+
+<section class="pagina desayuno">
+<img src="menu.png">
+</section>
+
+
+<!-- 7 ENSALADAS -->
+
+<section class="pagina ensaladas">
+<img src="menu.png">
+</section>
+
+
+<!-- 8 AGREGADOS -->
+
+<section class="pagina agregados">
+<img src="menu.png">
+</section>
+
+
+</div>
+
+
+<div class="indicador" id="indicador">
+Almuerzo • 1/8
+</div>
+
+
+<script>
+
+const carrusel =
+document.getElementById("carrusel");
+
+const indicador =
+document.getElementById("indicador");
+
+
+const nombres = [
+
+"Almuerzo",
+"Picoteo",
+"Parrilla",
+"Bebidas",
+"Para la garganta",
