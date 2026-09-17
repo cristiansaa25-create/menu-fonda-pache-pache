@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Fonda Pache Pache</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 html,body{
   margin:0;
@@ -17,7 +20,6 @@ html,body{
 
 body{
   min-height:100vh;
-  overflow-x:hidden;
 }
 
 /* CABECERA */
@@ -54,15 +56,15 @@ body{
   font-weight:bold;
   background:#fff3d5;
   color:#5b321d;
+  cursor:pointer;
 }
 
-/* VENTANA */
+/* CONTENEDOR */
 #ventana{
   width:100%;
   overflow:hidden;
 }
 
-/* PÁGINAS */
 #paginas{
   display:flex;
   width:100%;
@@ -77,4 +79,37 @@ body{
   justify-content:center;
 }
 
+/* HOJA */
+.hoja{
+  position:relative;
+  width:100%;
+  max-width:700px;
+  overflow:hidden;
+  background:#fff3d5;
+  border-radius:12px;
+}
+
 /*
+ Cada página muestra una zona diferente
+ del PNG original.
+*/
+.fondo{
+  position:absolute;
+  left:0;
+  width:100%;
+  height:auto;
+  display:block;
+  pointer-events:none;
+}
+
+/* PRECIOS */
+.precio{
+  position:absolute;
+  z-index:20;
+  font-weight:900;
+  font-size:clamp(12px,3.3vw,19px);
+  color:#a62019;
+  background:rgba(255,248,231,.94);
+  padding:2px 5px;
+  border-radius:4px;
+  white-space:nowrap;
