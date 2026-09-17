@@ -106,4 +106,270 @@ body{
 
 .pie{
     text-align:center;
-    margin-top
+    margin-top:25px;
+    padding:20px;
+    background:rgba(23,107,58,.94);
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+}
+
+@media(max-width:500px){
+
+    .encabezado h1{
+        font-size:27px;
+    }
+
+    .categoria h2{
+        font-size:20px;
+    }
+
+    .producto{
+        font-size:16px;
+        padding:13px;
+    }
+
+    .precio{
+        font-size:17px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="encabezado">
+
+    <h1>🇨🇱 Fonda Pache Pache 🇨🇱</h1>
+
+    <p>Menú Dieciochero</p>
+
+</header>
+
+
+<main id="menu" class="menu">
+
+    <div class="estado">
+        Cargando menú...
+    </div>
+
+</main>
+
+
+<footer class="pie">
+
+    🇨🇱 ¡Felices Fiestas Patrias! 🇨🇱
+
+</footer>
+
+
+<script type="module">
+
+import { db } from "./firebase-config.js";
+
+import {
+    collection,
+    onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+const menu =
+document.getElementById("menu");
+
+
+const ordenCategorias = [
+
+    "Desayuno",
+    "Almuerzo",
+    "Picoteo",
+    "Parrilla",
+    "Bebidas",
+    "Para la garganta"
+
+];
+
+
+function formatoPrecio(valor){
+
+    const numero = Number(valor);
+
+    if(!Number.isFinite(numero)){
+        return "";
+    }
+
+    return "$" +
+    numero.toLocaleString("es-CL");
+
+}
+
+
+onSnapshot(
+
+    collection(db,"menu"),
+
+    snapshot => {
+
+        menu.innerHTML = "";
+
+
+        if(snapshot.empty){
+
+            menu.innerHTML =
+            '<div class="estado">' +
+            'Menú próximamente disponible.' +
+            '</div>';
+
+            return;
+
+        }
+
+
+        const categorias = {};
+
+
+        snapshot.forEach(documento => {
+
+            const producto =
+            documento.data();
+
+
+            const categoria =
+            producto.categoria || "Otros";
+
+
+            if(!categorias[categoria]){
+
+                categorias[categoria] = [];
+
+            }
+
+
+            categorias[categoria]
+            .push(producto);
+
+        });
+
+
+        const categoriasEncontradas =
+        Object.keys(categorias);
+
+
+        categoriasEncontradas.sort(
+        (a,b) => {
+
+            let posicionA =
+            ordenCategorias.indexOf(a);
+
+            let posicionB =
+            ordenCategorias.indexOf(b);
+
+
+            if(posicionA === -1){
+                posicionA = 999;
+            }
+
+            if(posicionB === -1){
+                posicionB = 999;
+            }
+
+
+            return posicionA - posicionB;
+
+        });
+
+
+        categoriasEncontradas
+        .forEach(nombreCategoria => {
+
+
+            const seccion =
+            document.createElement("section");
+
+            seccion.className =
+            "categoria";
+
+
+            const titulo =
+            document.createElement("h2");
+
+            titulo.textContent =
+            nombreCategoria;
+
+
+            seccion.appendChild(titulo);
+
+
+            categorias[nombreCategoria]
+            .sort(
+                (a,b) =>
+                (a.nombre || "")
+                .localeCompare(
+                    b.nombre || "",
+                    "es"
+                )
+            )
+            .forEach(producto => {
+
+
+                const fila =
+                document.createElement("div");
+
+                fila.className =
+                "producto";
+
+
+                const nombre =
+                document.createElement("span");
+
+                nombre.className =
+                "nombre";
+
+                nombre.textContent =
+                producto.nombre ||
+                "Producto";
+
+
+                const precio =
+                document.createElement("span");
+
+                precio.className =
+                "precio";
+
+                precio.textContent =
+                formatoPrecio(
+                    producto.precio
+                );
+
+
+                fila.appendChild(nombre);
+                fila.appendChild(precio);
+
+                seccion.appendChild(fila);
+
+            });
+
+
+            menu.appendChild(seccion);
+
+        });
+
+    },
+
+
+    error => {
+
+        console.error(error);
+
+        menu.innerHTML =
+        '<div class="estado">' +
+        'No se pudo cargar el menú.' +
+        '</div>';
+
+    }
+
+);
+
+</script>
+
+</body>
+</html>
