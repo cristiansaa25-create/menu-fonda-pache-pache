@@ -65,16 +65,21 @@ html,body{
 }
 
 
-/* =========================
+/* =====================================
    NOMBRE MODIFICADO
-   ========================= */
+   Franja más ancha para tapar
+   completamente el nombre antiguo
+   ===================================== */
 
 .nombre-dinamico{
 
   position:absolute;
 
   left:7.5%;
-  width:53%;
+
+  /* ANTES ERA 53% */
+  width:84.5%;
+
   height:2.9%;
 
   transform:translateY(-50%);
@@ -84,10 +89,7 @@ html,body{
   display:flex;
   align-items:center;
 
-  /*
-  Fondo parecido al papel
-  para tapar el nombre antiguo
-  */
+  /* COLOR CREMA DEL PAPEL */
   background:#f3e5bd;
 
   color:#111;
@@ -110,9 +112,10 @@ html,body{
 }
 
 
-/* =========================
+/* =====================================
    PRECIOS
-   ========================= */
+   Quedan por encima de la franja
+   ===================================== */
 
 .precio{
 
@@ -141,7 +144,8 @@ html,body{
 
   white-space:nowrap;
 
-  z-index:20;
+  /* POR ENCIMA DEL NOMBRE */
+  z-index:40;
 
   text-shadow:
     0 1px 2px #fff,
@@ -149,9 +153,7 @@ html,body{
 }
 
 
-/* =========================
-   CONTADOR DE PÁGINAS
-   ========================= */
+/* CONTADOR */
 
 #contador{
 
@@ -162,8 +164,7 @@ html,body{
 
   transform:translateX(-50%);
 
-  background:
-    rgba(0,0,0,.72);
+  background:rgba(0,0,0,.72);
 
   color:white;
 
@@ -183,7 +184,6 @@ html,body{
 }
 
 </style>
-
 </head>
 
 
@@ -337,10 +337,6 @@ Almuerzo • 1/8
 </div>
 
 
-<!-- =========================
-     DESLIZAMIENTO
-     ========================= -->
-
 <script>
 
 const menu =
@@ -350,7 +346,7 @@ const contador =
   document.getElementById("contador");
 
 
-const nombres=[
+const nombres = [
 
   "Almuerzo",
 
@@ -386,7 +382,7 @@ function actualizar(){
 
     " • " +
 
-    (pagina+1) +
+    (pagina + 1) +
 
     "/8";
 
@@ -400,11 +396,6 @@ menu.addEventListener(
 
 </script>
 
-
-
-<!-- =========================
-     FIREBASE
-     ========================= -->
 
 <script type="module">
 
@@ -429,8 +420,7 @@ from
 "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 
-
-const firebaseConfig={
+const firebaseConfig = {
 
   apiKey:
   "AIzaSyAUNLLg-qxtfA4IbWXWv6GP8iTnoYzmBjA",
@@ -453,7 +443,6 @@ const firebaseConfig={
 };
 
 
-
 const app =
   initializeApp(firebaseConfig);
 
@@ -462,13 +451,11 @@ const db =
   getFirestore(app);
 
 
+/* =====================================
+   POSICIONES
+   ===================================== */
 
-/* ==================================
-   POSICIONES DE LOS PRODUCTOS
-   ================================== */
-
-
-const posiciones={
+const posiciones = {
 
 
 "Almuerzo":{
@@ -494,7 +481,6 @@ const posiciones={
 },
 
 
-
 "Picoteo":{
 
   "Completos":53.7,
@@ -518,7 +504,6 @@ const posiciones={
 },
 
 
-
 "Parrilla":{
 
   "Anticucho":66.0,
@@ -526,7 +511,6 @@ const posiciones={
   "Choripán":69.8
 
 },
-
 
 
 "Bebidas":{
@@ -548,7 +532,6 @@ const posiciones={
 },
 
 
-
 "Para la garganta":{
 
   "Terremoto":62.1,
@@ -564,7 +547,6 @@ const posiciones={
 },
 
 
-
 "Desayuno":{
 
   "Té":64.0,
@@ -574,7 +556,6 @@ const posiciones={
 },
 
 
-
 "Ensaladas":{
 
   "Chilena":68.2,
@@ -582,7 +563,6 @@ const posiciones={
   "Tomate solo":72.1
 
 },
-
 
 
 "Agregados":{
@@ -597,15 +577,12 @@ const posiciones={
 
 }
 
-
 };
 
 
-
-/* ==================================
+/* =====================================
    NORMALIZAR TEXTO
-   ================================== */
-
+   ===================================== */
 
 function normalizar(texto){
 
@@ -635,11 +612,9 @@ function normalizar(texto){
 }
 
 
-
-/* ==================================
+/* =====================================
    FORMATO PESOS CHILENOS
-   ================================== */
-
+   ===================================== */
 
 function precioCLP(valor){
 
@@ -667,16 +642,11 @@ function precioCLP(valor){
 }
 
 
-
-/* ==================================
+/* =====================================
    PINTAR PRODUCTO
-   ================================== */
-
+   ===================================== */
 
 function pintarProducto(datos){
-
-
-  /* BUSCAR CATEGORÍA */
 
 
   const categoriaEncontrada =
@@ -703,25 +673,16 @@ function pintarProducto(datos){
   }
 
 
-
   /*
-  IMPORTANTE:
-
-  nombreOriginal sirve para
-  mantener la posición aunque
-  cambiemos el nombre visible.
+  nombreOriginal mantiene la
+  posición aunque cambies el nombre.
   */
-
 
   const nombreReferencia =
 
     datos.nombreOriginal ||
 
     datos.nombre;
-
-
-
-  /* BUSCAR POSICIÓN ORIGINAL */
 
 
   const productoEncontrado =
@@ -752,10 +713,6 @@ function pintarProducto(datos){
     return;
 
   }
-
-
-
-  /* BUSCAR LA HOJA */
 
 
   const hoja =
@@ -795,7 +752,6 @@ function pintarProducto(datos){
   }
 
 
-
   const posicion =
 
     posiciones[
@@ -805,10 +761,9 @@ function pintarProducto(datos){
     ];
 
 
-
-  /* ==================================
-     MOSTRAR NOMBRE NUEVO
-     ================================== */
+/* =====================================
+   NOMBRE NUEVO
+   ===================================== */
 
 
   const fueModificado =
@@ -824,7 +779,6 @@ function pintarProducto(datos){
     normalizar(
       datos.nombreOriginal
     );
-
 
 
   if(fueModificado){
@@ -857,14 +811,12 @@ function pintarProducto(datos){
       nombreNuevo
     );
 
-
   }
 
 
-
-  /* ==================================
-     MOSTRAR PRECIO
-     ================================== */
+/* =====================================
+   PRECIO
+   ===================================== */
 
 
   const precio =
@@ -895,14 +847,12 @@ function pintarProducto(datos){
     precio
   );
 
-
 }
 
 
-
-/* ==================================
-   LEER FIRESTORE EN TIEMPO REAL
-   ================================== */
+/* =====================================
+   FIREBASE EN TIEMPO REAL
+   ===================================== */
 
 
 onSnapshot(
@@ -914,12 +864,6 @@ onSnapshot(
 
 
   snapshot => {
-
-
-    /*
-    BORRAR ELEMENTOS DINÁMICOS
-    ANTES DE VOLVER A PINTAR
-    */
 
 
     document
@@ -939,24 +883,15 @@ onSnapshot(
     );
 
 
-
-    /*
-    PINTAR TODOS LOS PRODUCTOS
-    */
-
-
     snapshot.forEach(
 
       documento => {
 
 
-        const datos =
-
-          documento.data();
-
-
         pintarProducto(
-          datos
+
+          documento.data()
+
         );
 
 
