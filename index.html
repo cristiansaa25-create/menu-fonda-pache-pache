@@ -4,55 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fonda Pache Pache</title>
-
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #2b160d; }
+    body { min-height: 100vh; display: flex; justify-content: center; }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: #2b160d;
-    }
-
-    body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-    }
-
-    #menu {
-      position: relative;
-      width: 100%;
-      max-width: 1024px;
-      margin: 0 auto;
-    }
-
-    #menuImagen {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    #capaPrecios {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
+    #menu { position: relative; width: 100%; max-width: 1024px; margin: 0 auto; }
+    #menuImagen { display: block; width: 100%; height: auto; }
+    #capaPrecios { position: absolute; inset: 0; pointer-events: none; }
 
     .precio {
       position: absolute;
       transform: translate(-100%, -50%);
       font-family: Arial, sans-serif;
       font-weight: 900;
-      font-size: clamp(9px, 1.7vw, 18px);
+      font-size: clamp(9px, 1.7vw, 16px);
       color: #a62019;
       background: rgba(255, 248, 231, 0.94);
       padding: 2px 4px;
       border-radius: 4px;
       white-space: nowrap;
       line-height: 1;
+      z-index: 20;
     }
 
     #estado {
@@ -68,237 +41,135 @@
       font-size: 12px;
       z-index: 20;
     }
-
-    #estado.oculto {
-      display: none;
-    }
+    #estado.oculto { display: none; }
   </style>
 </head>
-
 <body>
-
-<div id="menu">
-
-  <img
-    id="menuImagen"
-    src="menú-fonda-pache-pache.png"
-    alt="Menú Fonda Pache Pache"
-  >
-
-  <div id="capaPrecios"></div>
-
-</div>
-
-<div id="estado">Cargando precios...</div>
-
-
-<script type="module">
-
-import { db }
-from "./firebase-config.js";
-
-import {
-  collection,
-  onSnapshot
-}
-from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
-
-const capa =
-document.getElementById("capaPrecios");
-
-const estado =
-document.getElementById("estado");
-
-
-/*
-=================================
- POSICIONES SOBRE EL PNG ORIGINAL
-=================================
-
-Primer número = posición horizontal
-Segundo número = posición vertical
-
-Luego podemos mover cada precio
-hasta dejarlo exactamente al lado
-del producto correspondiente.
-*/
-
-const posiciones = {
-
-  "pollo asado": [21,43.1],
-  "cazuela": [44,30.5],
-  "costillar": [44,33],
-  "prieta": [44,35.5],
-  "mechada": [44,38],
-  "cocimiento": [44,40.5],
-  "charquican": [44,40.5],
-  "pernil": [44,43],
-  "lomo vetado": [44,45.5],
-  "menu nino": [44,48],
-
-  "completo": [64,43.1],
-  "completos": [64,43.1],
-  "churrasco": [64,44.6],
-  "salchipapa": [64,46.1],
-  "papas fritas": [64,47.6],
-  "handroll": [64,49.1],
-  "empanada de queso": [64,50.6],
-  "media luna": [64,52.1],
-  "chorrillana": [64,53.6],
-  "sandwich de lomito": [64,55.1],
-
-  "anticucho": [44,55],
-  "choripan": [44,57.5],
-
-  "terremoto nino": [93,55],
-  "bebida lata": [93,57.5],
-  "agua botella": [93,60],
-  "jugo botella": [93,62.5],
-  "vino 3/4": [93,65],
-  "whisky + 4 latas": [93,67.5],
-  "pisco + 4 latas": [93,70],
-
-  "terremoto": [44,65],
-  "michelada": [44,67.5],
-  "cerveza lata": [44,70],
-  "cerveza": [44,72.5],
-  "whisky": [44,75],
-
-  "te": [93,77.5],
-  "cafe": [93,80]
-
-};
-
-
-function normalizar(texto) {
-
-  return String(texto || "")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, " ");
-
-}
-
-
-function formatoPrecio(valor) {
-
-  const numero =
-  Number(valor);
-
-  if (!Number.isFinite(numero))
-    return "";
-
-  return "$" +
-    Math.round(numero)
-    .toLocaleString("es-CL");
-
-}
-
-
-function mostrarPrecios(productos) {
-
-  capa.innerHTML = "";
-
-  let encontrados = 0;
-
-  productos.forEach(producto => {
-
-    const nombre =
-    normalizar(producto.nombre);
-
-    const posicion =
-    posiciones[nombre];
-
-    if (!posicion)
-      return;
-
-    if (
-      producto.precio === undefined ||
-      producto.precio === null ||
-      producto.precio === ""
-    )
-      return;
-
-
-    const precio =
-    document.createElement("div");
-
-    precio.className =
-    "precio";
-
-    precio.textContent =
-    formatoPrecio(producto.precio);
-
-    precio.style.left =
-    posicion[0] + "%";
-
-    precio.style.top =
-    posicion[1] + "%";
-
-    capa.appendChild(precio);
-
-    encontrados++;
-
-  });
-
-
-  if (encontrados > 0) {
-
-    estado.classList.add("oculto");
-
-  } else {
-
-    estado.textContent =
-    "Menú cargado - esperando precios";
-
-  }
-
-}
-
-
-/*
-=================================
- FIRESTORE
-=================================
-Colección utilizada: menu
-*/
-
-onSnapshot(
-
-  collection(db, "menu"),
-
-  snapshot => {
-
-    const productos = [];
-
-    snapshot.forEach(documento => {
-
-      productos.push({
-        id: documento.id,
-        ...documento.data()
+  <div id="menu">
+    <img id="menuImagen" src="menú-fonda-pache-pache.png" alt="Menú Fonda Pache Pache">
+    <div id="capaPrecios"></div>
+  </div>
+
+  <div id="estado">Cargando precios...</div>
+
+  <script type="module">
+    import { db } from "./firebase-config.js";
+    import {
+      collection,
+      onSnapshot
+    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+    const capa = document.getElementById("capaPrecios");
+    const estado = document.getElementById("estado");
+
+    const puestos = {
+      "pollo asado":[21,43.1],
+      "cazuela":[44,30.5],
+      "costillar":[44,33],
+      "prieta":[44,35.5],
+      "mechada":[44,38],
+      "cocimiento":[44,40.5],
+      "charquicano":[44,40.5],
+      "pernil":[44,43],
+      "lomo vetado":[44,45.5],
+      "menu niño":[44,48],
+
+      "completo":[64,43.1],
+      "completos":[64,43.1],
+      "churrasco":[64,44.6],
+      "salchipapa":[64,46.1],
+      "papas fritas":[64,47.6],
+      "rollo de mano":[64,49.1],
+      "handroll":[64,49.1],
+      "empanada de queso":[64,50.6],
+      "media luna":[64,52.1],
+      "chorillana":[64,53.6],
+      "chorrillana":[64,53.6],
+      "sandwich de lomito":[64,55.1],
+
+      "anticucho":[44,55],
+      "choripan":[44,57.5],
+
+      "terremoto niño":[93,55],
+      "bebida lata":[93,57.5],
+      "agua botella":[93,60],
+      "jugo botella":[93,62.5],
+      "vino 3/4":[93,65],
+      "whisky + 4 latas":[93,67.5],
+      "pisco + 4 latas":[93,70],
+
+      "terremoto":[44,65],
+      "michelada":[44,67.5],
+      "cerveza lata":[44,70],
+      "cerveza":[44,72.5],
+      "whisky":[44,75],
+
+      "te":[93,77.5],
+      "cafeteria":[93,80],
+      "cafe":[93,80]
+    };
+
+    function normalizar(texto) {
+      return String(texto || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, " ");
+    }
+
+    function formatoPrecio(valor) {
+      const numero = Number(valor);
+      if (!Number.isFinite(numero)) return "";
+      return "$" + Math.round(numero).toLocaleString("es-CL");
+    }
+
+    function mostrarPrecios(productos) {
+      capa.innerHTML = "";
+      let encontrados = 0;
+
+      productos.forEach(producto => {
+        const nombre = normalizar(producto.nombre);
+        const posicion = puestos[nombre];
+
+        if (!posicion) return;
+        if (producto.precio === undefined ||
+            producto.precio === null ||
+            producto.precio === "") return;
+
+        const precio = document.createElement("div");
+        precio.className = "precio";
+        precio.textContent = formatoPrecio(producto.precio);
+        precio.style.left = posicion[0] + "%";
+        precio.style.top = posicion[1] + "%";
+        capa.appendChild(precio);
+        encontrados++;
       });
 
-    });
+      if (encontrados > 0) {
+        estado.classList.add("oculto");
+      } else {
+        estado.textContent = "Menú cargado - esperando precios";
+      }
+    }
 
-    mostrarPrecios(productos);
-
-  },
-
-  error => {
-
-    console.error(error);
-
-    estado.textContent =
-    "No se pudieron cargar los precios";
-
-  }
-
-);
-
-</script>
-
+    onSnapshot(
+      collection(db, "menú"),
+      snapshot => {
+        const productos = [];
+        snapshot.forEach(documento => {
+          productos.push({
+            id: documento.id,
+            ...documento.data()
+          });
+        });
+        mostrarPrecios(productos);
+      },
+      error => {
+        console.error(error);
+        estado.textContent = "No se pudo cargar los precios";
+      }
+    );
+  </script>
 </body>
 </html>
