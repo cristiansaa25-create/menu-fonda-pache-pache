@@ -6,86 +6,92 @@
 <title>Fonda Pache Pache</title>
 
 <style>
-*{box-sizing:border-box}
-
-html,body{
-  margin:0;
-  padding:0;
-  width:100%;
-  height:100%;
-  background:#2b160d;
-  overflow:hidden;
+* {
+  box-sizing: border-box;
 }
 
-#menu{
-  width:100%;
-  height:100dvh;
-  display:flex;
-  overflow-x:auto;
-  overflow-y:hidden;
-  scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;
-  scrollbar-width:none;
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #2b160d;
+  overflow: hidden;
 }
 
-#menu::-webkit-scrollbar{
-  display:none;
+#menu {
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
 }
 
-.pagina{
-  min-width:100%;
-  width:100%;
-  height:100dvh;
-  flex:0 0 100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  scroll-snap-align:start;
-  scroll-snap-stop:always;
+#menu::-webkit-scrollbar {
+  display: none;
 }
 
-.hoja{
-  position:relative;
-  height:100dvh;
-  max-width:100vw;
-  aspect-ratio:721/1536;
+.pagina {
+  min-width: 100%;
+  width: 100%;
+  height: 100dvh;
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
-.hoja img{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:fill;
+.hoja {
+  position: relative;
+  height: 100dvh;
+  max-width: 100vw;
+  aspect-ratio: 721 / 1536;
 }
 
-.precio{
-  position:absolute;
-  left:63%;
-  width:29%;
-  transform:translateY(-50%);
-  text-align:right;
-  color:#15100b;
-  font-family:Georgia,"Times New Roman",serif;
-  font-weight:700;
-  font-size:clamp(13px,2.45vh,24px);
-  line-height:1;
-  white-space:nowrap;
-  text-shadow:0 1px 1px rgba(255,255,255,.55);
+.hoja img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
 }
 
-#contador{
-  position:fixed;
-  bottom:18px;
-  left:50%;
-  transform:translateX(-50%);
-  background:rgba(0,0,0,.72);
-  color:white;
-  padding:7px 14px;
-  border-radius:20px;
-  font-family:Arial,sans-serif;
-  font-size:14px;
-  z-index:100;
-  white-space:nowrap;
+/* PRECIOS SOBRE LA IMAGEN */
+.precio {
+  position: absolute;
+  left: 61%;
+  width: 31%;
+  transform: translateY(-50%);
+  text-align: right;
+  color: #111;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: bold;
+  font-size: clamp(14px, 2.25vh, 23px);
+  line-height: 1;
+  white-space: nowrap;
+  z-index: 20;
+  text-shadow:
+    0 1px 2px #fff,
+    0 0 3px #fff;
+}
+
+#contador {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.72);
+  color: white;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  z-index: 100;
+  white-space: nowrap;
 }
 </style>
 </head>
@@ -94,269 +100,322 @@ html,body{
 
 <div id="menu">
 
-<div class="pagina">
-<div class="hoja" data-categoria="Almuerzo">
-<img src="01-almuerzo.png" alt="Almuerzo">
-</div>
-</div>
+  <div class="pagina">
+    <div class="hoja" data-categoria="Almuerzo">
+      <img src="01-almuerzo.png" alt="Almuerzo">
+    </div>
+  </div>
 
-<div class="pagina">
-<div class="hoja" data-categoria="Picoteo">
-<img src="02-picoteo.png" alt="Picoteo">
-</div>
-</div>
+  <div class="pagina">
+    <div class="hoja" data-categoria="Picoteo">
+      <img src="02-picoteo.png" alt="Picoteo">
+    </div>
+  </div>
 
-<div class="pagina">
-<div class="hoja" data-categoria="Parrilla">
-<img src="03-parrilla.png" alt="Parrilla">
-</div>
-</div>
+  <div class="pagina">
+    <div class="hoja" data-categoria="Parrilla">
+      <img src="03-parrilla.png" alt="Parrilla">
+    </div>
+  </div>
 
-<div class="pagina">
-<div class="hoja" data-categoria="Bebidas">
-<img src="04-bebidas.png" alt="Bebidas">
-</div>
-</div>
+  <div class="pagina">
+    <div class="hoja" data-categoria="Bebidas">
+      <img src="04-bebidas.png" alt="Bebidas">
+    </div>
+  </div>
 
-<div class="pagina">
-<div class="hoja" data-categoria="Para la garganta">
-<img src="05-para-la-garganta.png" alt="Para la garganta">
-</div>
-</div>
+  <div class="pagina">
+    <div class="hoja" data-categoria="Para la garganta">
+      <img src="05-para-la-garganta.png" alt="Para la garganta">
+    </div>
+  </div>
 
-<div class="pagina">
-<div class="hoja" data-categoria="Desayuno">
-<img src="06-desayuno.png" alt="Desayuno">
-</div>
-</div>
+  <div class="pagina">
+    <div class="hoja" data-categoria="Desayuno">
+      <img src="06-desayuno.png" alt="Desayuno">
+    </div>
+  </div>
 
-<div class="pagina">
-<div class="hoja" data-categoria="Ensaladas">
-<img src="07-ensaladas.png" alt="Ensaladas">
-</div>
-</div>
+  <div class="pagina">
+    <div class="hoja" data-categoria="Ensaladas">
+      <img src="07-ensaladas.png" alt="Ensaladas">
+    </div>
+  </div>
 
-<div class="pagina">
-<div class="hoja" data-categoria="Agregados">
-<img src="08-agregados.png" alt="Agregados">
-</div>
-</div>
+  <div class="pagina">
+    <div class="hoja" data-categoria="Agregados">
+      <img src="08-agregados.png" alt="Agregados">
+    </div>
+  </div>
 
 </div>
 
 <div id="contador">Almuerzo • 1/8</div>
 
 <script>
-const menu=document.getElementById("menu");
-const contador=document.getElementById("contador");
+const menu = document.getElementById("menu");
+const contador = document.getElementById("contador");
 
-const nombres=[
-"Almuerzo",
-"Picoteo",
-"Parrilla",
-"Bebidas",
-"Para la garganta",
-"Desayuno",
-"Ensaladas",
-"Agregados"
+const nombres = [
+  "Almuerzo",
+  "Picoteo",
+  "Parrilla",
+  "Bebidas",
+  "Para la garganta",
+  "Desayuno",
+  "Ensaladas",
+  "Agregados"
 ];
 
-function actualizar(){
- const pagina=Math.round(menu.scrollLeft/menu.clientWidth);
- contador.textContent=nombres[pagina]+" • "+(pagina+1)+"/8";
+function actualizar() {
+  const pagina = Math.round(
+    menu.scrollLeft / menu.clientWidth
+  );
+
+  contador.textContent =
+    nombres[pagina] +
+    " • " +
+    (pagina + 1) +
+    "/8";
 }
 
-menu.addEventListener("scroll",actualizar);
+menu.addEventListener("scroll", actualizar);
 </script>
 
 <script type="module">
 
-import { db } from "./firebase-config.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
 import {
- collection,
- onSnapshot
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
-
-const posiciones={
-
-"Almuerzo":{
-"Pollo asado":50.6,
-"Cazuela":54.1,
-"Costillar":57.6,
-"Prieta":61.0,
-"Mechada":64.5,
-"Cocimiento":68.0,
-"Pernil":71.5,
-"Lomo vetado":75.0,
-"Menú niño":78.5
-},
-
-"Picoteo":{
-"Completos":53.7,
-"Churrasco":57.0,
-"Salchipapa":60.2,
-"Papas fritas":63.3,
-"Handroll":66.5,
-"Empanada de queso":69.8,
-"Media luna - 3 x 2000":73.0,
-"Chorrillana":76.3,
-"Sándwich de lomito":79.5
-},
-
-"Parrilla":{
-"Anticucho":66.0,
-"Choripán":69.8
-},
-
-"Bebidas":{
-"Terremoto niño":55.0,
-"Bebida lata":58.8,
-"Agua botella":62.6,
-"Jugo botella":66.4,
-"Vino 3/4":70.2,
-"Whisky + 4 latas":74.0,
-"Pisco + 4 latas":77.8
-},
-
-"Para la garganta":{
-"Terremoto":62.1,
-"Michelada":66.0,
-"Cerveza lata":69.9,
-"Cerveza":73.8,
-"Whisky":77.7
-},
-
-"Desayuno":{
-"Té":64.0,
-"Café":68.0
-},
-
-"Ensaladas":{
-"Chilena":68.2,
-"Tomate solo":72.1
-},
-
-"Agregados":{
-"Arroz":66.4,
-"Papa mayo":70.2,
-"Papa cocida":74.0,
-"Papa frita":77.8
+  getFirestore,
+  collection,
+  onSnapshot
 }
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+  apiKey:
+  "AIzaSyAUNLLg-qxtfA4IbWXWv6GP8iTnoYzmBjA",
+
+  authDomain:
+  "fonda-pache-pache-menu.firebaseapp.com",
+
+  projectId:
+  "fonda-pache-pache-menu",
+
+  storageBucket:
+  "fonda-pache-pache-menu.firebasestorage.app",
+
+  messagingSenderId:
+  "385605487668",
+
+  appId:
+  "1:385605487668:web:dad962c8a71e39f7bece61"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+/* POSICIÓN DE CADA PRECIO */
+
+const posiciones = {
+
+  "Almuerzo": {
+    "Pollo asado": 50.6,
+    "Cazuela": 54.1,
+    "Costillar": 57.6,
+    "Prieta": 61.0,
+    "Mechada": 64.5,
+    "Cocimiento": 68.0,
+    "Pernil": 71.5,
+    "Lomo vetado": 75.0,
+    "Menú niño": 78.5
+  },
+
+  "Picoteo": {
+    "Completos": 53.7,
+    "Churrasco": 57.0,
+    "Salchipapa": 60.2,
+    "Papas fritas": 63.3,
+    "Handroll": 66.5,
+    "Empanada de queso": 69.8,
+    "Media luna - 3 x 2000": 73.0,
+    "Chorrillana": 76.3,
+    "Sándwich de lomito": 79.5
+  },
+
+  "Parrilla": {
+    "Anticucho": 66.0,
+    "Choripán": 69.8
+  },
+
+  "Bebidas": {
+    "Terremoto niño": 55.0,
+    "Bebida lata": 58.8,
+    "Agua botella": 62.6,
+    "Jugo botella": 66.4,
+    "Vino 3/4": 70.2,
+    "Whisky + 4 latas": 74.0,
+    "Pisco + 4 latas": 77.8
+  },
+
+  "Para la garganta": {
+    "Terremoto": 62.1,
+    "Michelada": 66.0,
+    "Cerveza lata": 69.9,
+    "Cerveza": 73.8,
+    "Whisky": 77.7
+  },
+
+  "Desayuno": {
+    "Té": 64.0,
+    "Café": 68.0
+  },
+
+  "Ensaladas": {
+    "Chilena": 68.2,
+    "Tomate solo": 72.1
+  },
+
+  "Agregados": {
+    "Arroz": 66.4,
+    "Papa mayo": 70.2,
+    "Papa cocida": 74.0,
+    "Papa frita": 77.8
+  }
 
 };
 
 
-function normalizar(texto){
+/* NORMALIZA LOS NOMBRES */
 
- return String(texto ?? "")
- .normalize("NFD")
- .replace(/[\u0300-\u036f]/g,"")
- .replace(/[–—]/g,"-")
- .replace(/\s+/g," ")
- .trim()
- .toLowerCase();
+function normalizar(texto) {
 
+  return String(texto || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[–—]/g, "-")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
 }
 
 
-function buscarClave(obj,nombre){
+/* FORMATO PESOS CHILENOS */
 
- const n=normalizar(nombre);
+function precioCLP(valor) {
 
- return Object.keys(obj||{})
- .find(k=>normalizar(k)===n);
+  const numero = Number(valor);
 
+  if (!Number.isFinite(numero)) {
+    return "";
+  }
+
+  return "$" +
+    Math.round(numero)
+    .toLocaleString("es-CL");
 }
 
 
-function formatoPrecio(valor){
+/* COLOCAR PRECIO SOBRE LA IMAGEN */
 
- const n=Number(valor);
+function pintarPrecio(datos) {
 
- if(!Number.isFinite(n)) return "";
+  const categoriaEncontrada =
+    Object.keys(posiciones).find(
+      categoria =>
+      normalizar(categoria) ===
+      normalizar(datos.categoria)
+    );
 
- return "$"+Math.round(n).toLocaleString("es-CL");
+  if (!categoriaEncontrada) {
+    return;
+  }
 
+
+  const productoEncontrado =
+    Object.keys(
+      posiciones[categoriaEncontrada]
+    ).find(
+      producto =>
+      normalizar(producto) ===
+      normalizar(datos.nombre)
+    );
+
+  if (!productoEncontrado) {
+    return;
+  }
+
+
+  const hoja =
+    [...document.querySelectorAll(".hoja")]
+    .find(
+      elemento =>
+      normalizar(
+        elemento.dataset.categoria
+      ) ===
+      normalizar(categoriaEncontrada)
+    );
+
+  if (!hoja) {
+    return;
+  }
+
+
+  const precio =
+    document.createElement("div");
+
+  precio.className = "precio";
+
+  precio.style.top =
+    posiciones[categoriaEncontrada]
+    [productoEncontrado] + "%";
+
+  precio.textContent =
+    precioCLP(datos.precio);
+
+  hoja.appendChild(precio);
 }
 
 
-function limpiarPrecios(){
-
- document.querySelectorAll(".precio")
- .forEach(e=>e.remove());
-
-}
-
-
-function pintarProducto(data){
-
- const categoriaReal=
- Object.keys(posiciones)
- .find(c=>normalizar(c)===normalizar(data.categoria));
-
- if(!categoriaReal) return;
-
-
- const productoReal=
- buscarClave(
- posiciones[categoriaReal],
- data.nombre
- );
-
- if(!productoReal) return;
-
-
- const hoja=
- [...document.querySelectorAll(".hoja")]
- .find(
- h=>normalizar(h.dataset.categoria)===
- normalizar(categoriaReal)
- );
-
- if(!hoja) return;
-
-
- const etiqueta=
- document.createElement("div");
-
- etiqueta.className="precio";
-
- etiqueta.style.top=
- posiciones[categoriaReal][productoReal]+"%";
-
- etiqueta.textContent=
- formatoPrecio(data.precio);
-
- etiqueta.title=productoReal;
-
- hoja.appendChild(etiqueta);
-
-}
-
+/* LEER FIRESTORE AUTOMÁTICAMENTE */
 
 onSnapshot(
+  collection(db, "menu"),
 
- collection(db,"menu"),
+  snapshot => {
 
- snapshot=>{
+    document
+      .querySelectorAll(".precio")
+      .forEach(elemento =>
+        elemento.remove()
+      );
 
-  limpiarPrecios();
 
-  snapshot.forEach(
-   doc=>pintarProducto(doc.data())
-  );
+    snapshot.forEach(documento => {
 
- },
+      pintarPrecio(
+        documento.data()
+      );
 
- error=>{
-  console.error(
-   "No se pudieron cargar los precios:",
-   error
-  );
- }
+    });
 
+  },
+
+  error => {
+
+    console.error(
+      "Error leyendo Firestore:",
+      error
+    );
+
+  }
 );
 
 </script>
