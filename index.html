@@ -2,374 +2,230 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Fonda Pache Pache - Menú</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fonda Pache Pache</title>
 
 <style>
-*{
-    box-sizing:border-box;
-}
-
+*{box-sizing:border-box}
 body{
-    margin:0;
-    min-height:100vh;
-    font-family:Arial,sans-serif;
-    color:#3b1d0b;
-
-    background:
-        linear-gradient(rgba(255,248,225,.82),rgba(255,248,225,.82)),
-        url("./menu-fonda-pache-pache.png");
-
-    background-size:cover;
-    background-position:center top;
-    background-attachment:fixed;
+ margin:0;background:#efe0bd;color:#3d2515;
+ font-family:Arial,sans-serif;
 }
-
-.encabezado{
-    text-align:center;
-    padding:25px 15px;
-    background:rgba(139,30,22,.94);
-    color:white;
-    border-bottom:6px solid #176b3a;
+.fonda{
+ max-width:900px;margin:auto;min-height:100vh;
+ background:#f8edcf;
 }
-
-.encabezado h1{
-    margin:0;
-    font-size:34px;
+.arriba{
+ height:14px;background:#d52b1e;
+ border-bottom:7px solid #fff;
 }
-
-.encabezado p{
-    margin:7px 0 0;
-    font-size:19px;
-    font-weight:bold;
+header{
+ text-align:center;padding:25px 12px 20px;
+ background:#f4d995;
+ border-bottom:5px solid #174d2b;
 }
-
-.menu{
-    width:94%;
-    max-width:850px;
-    margin:20px auto;
+.banderas{font-size:25px;letter-spacing:7px}
+header h1{
+ margin:8px 0 2px;color:#a62019;
+ font-size:36px;text-transform:uppercase;
 }
-
+header p{
+ margin:5px 0;color:#174d2b;
+ font-size:20px;font-weight:bold;
+}
+.subtitulo{
+ text-align:center;padding:10px;
+ background:#174d2b;color:white;
+ font-weight:bold;font-size:18px;
+}
+#menu{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:16px;padding:18px;
+}
 .categoria{
-    margin-bottom:20px;
-    background:rgba(255,255,255,.94);
-    border-radius:16px;
-    overflow:hidden;
-    box-shadow:0 4px 12px rgba(0,0,0,.25);
-    border:2px solid #d6b66f;
+ background:#fffaf0;
+ border:2px solid #c49a54;
+ border-radius:13px;
+ overflow:hidden;
+ box-shadow:0 3px 8px #0002;
 }
-
 .categoria h2{
-    margin:0;
-    padding:14px 18px;
-    text-align:center;
-    background:#176b3a;
-    color:white;
-    font-size:23px;
+ margin:0;padding:11px 10px;
+ text-align:center;text-transform:uppercase;
+ background:#a62019;color:#fff;
+ font-size:20px;
 }
-
 .producto{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-
-    padding:14px 18px;
-    border-bottom:1px dashed #c7a86a;
-    font-size:18px;
+ display:flex;align-items:flex-end;
+ padding:10px 12px;
+ border-bottom:1px dashed #b89b6c;
+ font-size:16px;
 }
-
-.producto:last-child{
-    border-bottom:none;
+.producto:last-child{border-bottom:0}
+.nombre{font-weight:bold}
+.puntos{
+ flex:1;border-bottom:2px dotted #b7a17b;
+ margin:0 7px 4px;min-width:15px;
 }
-
-.nombre{
-    flex:1;
-    font-weight:bold;
-}
-
 .precio{
-    font-size:19px;
-    font-weight:bold;
-    color:#a51e16;
-    white-space:nowrap;
+ color:#a62019;font-weight:bold;
+ white-space:nowrap;
 }
-
-.estado{
-    padding:30px;
-    text-align:center;
-    background:rgba(255,255,255,.94);
-    border-radius:15px;
-    font-weight:bold;
+.cargando{
+ grid-column:1/-1;text-align:center;
+ padding:30px;font-weight:bold;
 }
-
-.pie{
-    text-align:center;
-    margin-top:25px;
-    padding:20px;
-    background:rgba(23,107,58,.94);
-    color:white;
-    font-size:18px;
-    font-weight:bold;
+footer{
+ text-align:center;padding:18px;
+ background:#174d2b;color:#fff;
+ font-weight:bold;font-size:18px;
+ border-top:5px solid #d52b1e;
 }
-
-@media(max-width:500px){
-
-    .encabezado h1{
-        font-size:27px;
-    }
-
-    .categoria h2{
-        font-size:20px;
-    }
-
-    .producto{
-        font-size:16px;
-        padding:13px;
-    }
-
-    .precio{
-        font-size:17px;
-    }
+@media(max-width:600px){
+ #menu{grid-template-columns:1fr;padding:12px}
+ header h1{font-size:28px}
+ .producto{font-size:16px}
 }
 </style>
 </head>
 
 <body>
+<div class="fonda">
 
-<header class="encabezado">
+<div class="arriba"></div>
 
-    <h1>🇨🇱 Fonda Pache Pache 🇨🇱</h1>
-
-    <p>Menú Dieciochero</p>
-
+<header>
+ <div class="banderas">🇨🇱 🇨🇱 🇨🇱</div>
+ <h1>Fonda Pache Pache</h1>
+ <p>Menú Dieciochero</p>
 </header>
 
+<div class="subtitulo">
+🇨🇱 ¡Comida, tradición y celebración! 🇨🇱
+</div>
 
-<main id="menu" class="menu">
-
-    <div class="estado">
-        Cargando menú...
-    </div>
-
+<main id="menu">
+ <div class="cargando">Cargando menú...</div>
 </main>
 
-
-<footer class="pie">
-
-    🇨🇱 ¡Felices Fiestas Patrias! 🇨🇱
-
+<footer>
+🇨🇱 ¡Felices Fiestas Patrias! 🇨🇱
 </footer>
 
+</div>
 
 <script type="module">
 
-import { db } from "./firebase-config.js";
+import {db} from "./firebase-config.js";
 
 import {
-    collection,
-    onSnapshot
+ collection,
+ onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
+const menu=document.getElementById("menu");
 
-const menu =
-document.getElementById("menu");
-
-
-const ordenCategorias = [
-
-    "Desayuno",
-    "Almuerzo",
-    "Picoteo",
-    "Parrilla",
-    "Bebidas",
-    "Para la garganta"
-
+const orden=[
+ "Almuerzo",
+ "Picoteo",
+ "Parrilla",
+ "Bebidas",
+ "Para la garganta",
+ "Desayuno"
 ];
 
-
-function formatoPrecio(valor){
-
-    const numero = Number(valor);
-
-    if(!Number.isFinite(numero)){
-        return "";
-    }
-
-    return "$" +
-    numero.toLocaleString("es-CL");
-
+function precioCLP(valor){
+ const n=Number(valor);
+ return Number.isFinite(n)
+ ? "$"+n.toLocaleString("es-CL")
+ : "";
 }
 
-
 onSnapshot(
+ collection(db,"menu"),
 
-    collection(db,"menu"),
+ snapshot=>{
 
-    snapshot => {
+  menu.innerHTML="";
 
-        menu.innerHTML = "";
+  if(snapshot.empty){
+   menu.innerHTML=
+   '<div class="cargando">Menú próximamente disponible.</div>';
+   return;
+  }
 
+  const grupos={};
 
-        if(snapshot.empty){
+  snapshot.forEach(doc=>{
+   const p=doc.data();
+   const cat=p.categoria||"Otros";
 
-            menu.innerHTML =
-            '<div class="estado">' +
-            'Menú próximamente disponible.' +
-            '</div>';
+   if(!grupos[cat]) grupos[cat]=[];
 
-            return;
+   grupos[cat].push(p);
+  });
 
-        }
+  const categorias=Object.keys(grupos);
 
+  categorias.sort((a,b)=>{
+   let A=orden.indexOf(a);
+   let B=orden.indexOf(b);
 
-        const categorias = {};
+   if(A<0) A=999;
+   if(B<0) B=999;
 
+   return A-B;
+  });
 
-        snapshot.forEach(documento => {
+  categorias.forEach(cat=>{
 
-            const producto =
-            documento.data();
+   const caja=document.createElement("section");
+   caja.className="categoria";
 
+   const titulo=document.createElement("h2");
+   titulo.textContent=cat;
 
-            const categoria =
-            producto.categoria || "Otros";
+   caja.appendChild(titulo);
 
+   grupos[cat]
+   .sort((a,b)=>
+    (a.nombre||"").localeCompare(b.nombre||"","es")
+   )
+   .forEach(p=>{
 
-            if(!categorias[categoria]){
+    const fila=document.createElement("div");
+    fila.className="producto";
 
-                categorias[categoria] = [];
+    const nombre=document.createElement("span");
+    nombre.className="nombre";
+    nombre.textContent=p.nombre||"Producto";
 
-            }
+    const puntos=document.createElement("span");
+    puntos.className="puntos";
 
+    const precio=document.createElement("span");
+    precio.className="precio";
+    precio.textContent=precioCLP(p.precio);
 
-            categorias[categoria]
-            .push(producto);
+    fila.append(nombre,puntos,precio);
+    caja.appendChild(fila);
 
-        });
+   });
 
+   menu.appendChild(caja);
 
-        const categoriasEncontradas =
-        Object.keys(categorias);
+  });
 
+ },
 
-        categoriasEncontradas.sort(
-        (a,b) => {
-
-            let posicionA =
-            ordenCategorias.indexOf(a);
-
-            let posicionB =
-            ordenCategorias.indexOf(b);
-
-
-            if(posicionA === -1){
-                posicionA = 999;
-            }
-
-            if(posicionB === -1){
-                posicionB = 999;
-            }
-
-
-            return posicionA - posicionB;
-
-        });
-
-
-        categoriasEncontradas
-        .forEach(nombreCategoria => {
-
-
-            const seccion =
-            document.createElement("section");
-
-            seccion.className =
-            "categoria";
-
-
-            const titulo =
-            document.createElement("h2");
-
-            titulo.textContent =
-            nombreCategoria;
-
-
-            seccion.appendChild(titulo);
-
-
-            categorias[nombreCategoria]
-            .sort(
-                (a,b) =>
-                (a.nombre || "")
-                .localeCompare(
-                    b.nombre || "",
-                    "es"
-                )
-            )
-            .forEach(producto => {
-
-
-                const fila =
-                document.createElement("div");
-
-                fila.className =
-                "producto";
-
-
-                const nombre =
-                document.createElement("span");
-
-                nombre.className =
-                "nombre";
-
-                nombre.textContent =
-                producto.nombre ||
-                "Producto";
-
-
-                const precio =
-                document.createElement("span");
-
-                precio.className =
-                "precio";
-
-                precio.textContent =
-                formatoPrecio(
-                    producto.precio
-                );
-
-
-                fila.appendChild(nombre);
-                fila.appendChild(precio);
-
-                seccion.appendChild(fila);
-
-            });
-
-
-            menu.appendChild(seccion);
-
-        });
-
-    },
-
-
-    error => {
-
-        console.error(error);
-
-        menu.innerHTML =
-        '<div class="estado">' +
-        'No se pudo cargar el menú.' +
-        '</div>';
-
-    }
-
+ error=>{
+  console.error(error);
+  menu.innerHTML=
+  '<div class="cargando">No se pudo cargar el menú.</div>';
+ }
 );
 
 </script>
-
 </body>
 </html>
