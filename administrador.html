@@ -297,7 +297,7 @@ document.getElementById("btnGuardar")
 
 
 const consulta = query(
-    collection(db,"productos"),
+    collection(db,"menu"),
     orderBy("creado","desc")
 );
 
@@ -383,7 +383,7 @@ onSnapshot(
                         await deleteDoc(
                             doc(
                                 db,
-                                "productos",
+                                "menu",
                                 documento.id
                             )
                         );
