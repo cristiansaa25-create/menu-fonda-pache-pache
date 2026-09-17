@@ -4,63 +4,79 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fonda Pache Pache</title>
+<title>Fonda Pache Pache - Menú</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
+    min-height:100vh;
     font-family:Arial,sans-serif;
-    background:#f5e6c8;
     color:#3b1d0b;
+
+    background:
+        linear-gradient(rgba(255,248,225,.82),rgba(255,248,225,.82)),
+        url("./menu-fonda-pache-pache.png");
+
+    background-size:cover;
+    background-position:center top;
+    background-attachment:fixed;
 }
 
-header{
+.encabezado{
     text-align:center;
-    padding:28px 15px;
-    background:#8b1e16;
+    padding:25px 15px;
+    background:rgba(139,30,22,.94);
     color:white;
+    border-bottom:6px solid #176b3a;
 }
 
-header h1{
+.encabezado h1{
     margin:0;
     font-size:34px;
 }
 
-header p{
-    margin:8px 0 0;
-    font-size:18px;
+.encabezado p{
+    margin:7px 0 0;
+    font-size:19px;
+    font-weight:bold;
 }
 
 .menu{
+    width:94%;
     max-width:850px;
-    margin:auto;
-    padding:18px;
+    margin:20px auto;
 }
 
 .categoria{
-    background:white;
-    border-radius:15px;
-    margin-bottom:18px;
+    margin-bottom:20px;
+    background:rgba(255,255,255,.94);
+    border-radius:16px;
     overflow:hidden;
-    box-shadow:0 3px 10px #0002;
+    box-shadow:0 4px 12px rgba(0,0,0,.25);
+    border:2px solid #d6b66f;
 }
 
 .categoria h2{
     margin:0;
     padding:14px 18px;
+    text-align:center;
     background:#176b3a;
     color:white;
-    font-size:22px;
+    font-size:23px;
 }
 
 .producto{
     display:flex;
+    align-items:center;
     justify-content:space-between;
     gap:15px;
+
     padding:14px 18px;
-    border-bottom:1px dashed #c9b38f;
+    border-bottom:1px dashed #c7a86a;
     font-size:18px;
 }
 
@@ -69,201 +85,25 @@ header p{
 }
 
 .nombre{
+    flex:1;
     font-weight:bold;
 }
 
 .precio{
+    font-size:19px;
     font-weight:bold;
+    color:#a51e16;
     white-space:nowrap;
-    color:#8b1e16;
 }
 
 .estado{
-    text-align:center;
     padding:30px;
-    font-size:18px;
-}
-
-footer{
     text-align:center;
-    padding:20px;
+    background:rgba(255,255,255,.94);
+    border-radius:15px;
     font-weight:bold;
 }
-</style>
-</head>
 
-<body>
-
-<header>
-    <h1>🇨🇱 Fonda Pache Pache 🇨🇱</h1>
-    <p>Menú Dieciochero</p>
-</header>
-
-<main id="menu" class="menu">
-    <div class="estado">Cargando menú...</div>
-</main>
-
-<footer>
-    ¡Felices Fiestas Patrias!
-</footer>
-
-<script type="module">
-
-import { db } from "./firebase-config.js";
-
-import {
-    collection,
-    onSnapshot
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
-
-const menu = document.getElementById("menu");
-
-const ordenCategorias = [
-    "Desayuno",
-    "Almuerzo",
-    "Picoteo",
-    "Parrilla",
-    "Bebidas",
-    "Para la garganta"
-];
-
-
-function formatoPrecio(valor){
-
-    return "$" + Number(valor || 0)
-        .toLocaleString("es-CL");
-
-}
-
-
-onSnapshot(
-    collection(db,"menu"),
-
-    snapshot => {
-
-        menu.innerHTML = "";
-
-        if(snapshot.empty){
-
-            menu.innerHTML =
-            '<div class="estado">Menú próximamente disponible.</div>';
-
-            return;
-        }
-
-
-        const categorias = {};
-
-
-        snapshot.forEach(documento => {
-
-            const producto = documento.data();
-
-            const categoria =
-                producto.categoria || "Otros";
-
-            if(!categorias[categoria]){
-                categorias[categoria] = [];
-            }
-
-            categorias[categoria].push(producto);
-
-        });
-
-
-        const categoriasEncontradas =
-            Object.keys(categorias);
-
-
-        categoriasEncontradas.sort((a,b) => {
-
-            let posA = ordenCategorias.indexOf(a);
-            let posB = ordenCategorias.indexOf(b);
-
-            if(posA === -1) posA = 999;
-            if(posB === -1) posB = 999;
-
-            return posA - posB;
-
-        });
-
-
-        categoriasEncontradas.forEach(nombreCategoria => {
-
-            const seccion =
-                document.createElement("section");
-
-            seccion.className = "categoria";
-
-
-            const titulo =
-                document.createElement("h2");
-
-            titulo.textContent = nombreCategoria;
-
-            seccion.appendChild(titulo);
-
-
-            categorias[nombreCategoria]
-            .sort((a,b) =>
-                (a.nombre || "")
-                .localeCompare(
-                    b.nombre || "",
-                    "es"
-                )
-            )
-            .forEach(producto => {
-
-                const fila =
-                    document.createElement("div");
-
-                fila.className = "producto";
-
-
-                const nombre =
-                    document.createElement("span");
-
-                nombre.className = "nombre";
-
-                nombre.textContent =
-                    producto.nombre || "Producto";
-
-
-                const precio =
-                    document.createElement("span");
-
-                precio.className = "precio";
-
-                precio.textContent =
-                    formatoPrecio(producto.precio);
-
-
-                fila.appendChild(nombre);
-                fila.appendChild(precio);
-
-                seccion.appendChild(fila);
-
-            });
-
-
-            menu.appendChild(seccion);
-
-        });
-
-    },
-
-    error => {
-
-        console.error(error);
-
-        menu.innerHTML =
-        '<div class="estado">No se pudo cargar el menú.</div>';
-
-    }
-);
-
-</script>
-
-</body>
-</html>
+.pie{
+    text-align:center;
+    margin-top
