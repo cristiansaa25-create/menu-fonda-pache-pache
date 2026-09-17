@@ -1,322 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Fonda Pache Pache</title>
-
 <style>
-*{
-  box-sizing:border-box;
-}
-
-html,body{
-  margin:0;
-  padding:0;
-  width:100%;
-  height:100%;
-  background:#2b160d;
-  overflow:hidden;
-  font-family:Arial,sans-serif;
-}
-
-/* CARRUSEL */
-#carrusel{
-  display:flex;
-  width:100%;
-  height:100dvh;
-
-  overflow-x:auto;
-  overflow-y:hidden;
-
-  scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;
-  -webkit-overflow-scrolling:touch;
-
-  scrollbar-width:none;
-}
-
-#carrusel::-webkit-scrollbar{
-  display:none;
-}
-
-/* UNA CATEGORÍA POR PÁGINA */
-.pagina{
-  flex:0 0 100%;
-  width:100%;
-  height:100dvh;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  padding:12px;
-
-  scroll-snap-align:start;
-  scroll-snap-stop:always;
-
-  background:#2b160d;
-}
-
-/* VENTANA QUE RECORTA */
-.recorte{
-  position:relative;
-
-  width:100%;
-  max-width:680px;
-
-  overflow:hidden;
-
-  border-radius:15px;
-
-  box-shadow:0 5px 20px rgba(0,0,0,.45);
-
-  background:#2b160d;
-}
-
-/* IMAGEN ORIGINAL */
-.recorte img{
-  position:absolute;
-
-  max-width:none;
-  height:auto;
-
-  user-select:none;
-  pointer-events:none;
-}
-
-
-/* =====================================
-   FILA 1
-   ALMUERZO - PICOTEO - PARRILLA
-===================================== */
-
-.almuerzo .recorte,
-.picoteo .recorte,
-.parrilla .recorte{
-  aspect-ratio:0.82;
-}
-
-.almuerzo img,
-.picoteo img,
-.parrilla img{
-  width:300%;
-  top:-74%;
-}
-
-.almuerzo img{
-  left:0;
-}
-
-.picoteo img{
-  left:-100%;
-}
-
-.parrilla img{
-  left:-200%;
-}
-
-
-/* =====================================
-   FILA 2
-   BEBIDAS - GARGANTA - DESAYUNO
-===================================== */
-
-.bebidas .recorte,
-.garganta .recorte,
-.desayuno .recorte{
-  aspect-ratio:0.88;
-}
-
-.bebidas img,
-.garganta img,
-.desayuno img{
-  width:300%;
-  top:-237%;
-}
-
-.bebidas img{
-  left:0;
-}
-
-.garganta img{
-  left:-100%;
-}
-
-.desayuno img{
-  left:-200%;
-}
-
-
-/* =====================================
-   FILA 3
-   ENSALADAS - AGREGADOS
-===================================== */
-
-.ensaladas .recorte,
-.agregados .recorte{
-  aspect-ratio:1.35;
-}
-
-.ensaladas img,
-.agregados img{
-  width:200%;
-  top:-435%;
-}
-
-.ensaladas img{
-  left:0;
-}
-
-.agregados img{
-  left:-100%;
-}
-
-
-/* INDICADOR */
-#indicador{
-  position:fixed;
-
-  left:50%;
-  bottom:18px;
-
-  transform:translateX(-50%);
-
-  z-index:100;
-
-  background:rgba(0,0,0,.72);
-  color:white;
-
-  padding:8px 15px;
-
-  border-radius:22px;
-
-  font-size:14px;
-
-  white-space:nowrap;
-}
-
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#2b160d;font-family:Arial,sans-serif}
+#carrusel{height:100dvh;width:100%;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+#carrusel::-webkit-scrollbar{display:none}
+.pagina{flex:0 0 100%;width:100%;height:100dvh;display:flex;align-items:center;justify-content:center;padding:8px;scroll-snap-align:start;scroll-snap-stop:always}
+.pagina img{display:block;max-width:100%;max-height:calc(100dvh - 16px);width:auto;height:auto;object-fit:contain}
+#indicador{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:10;background:rgba(0,0,0,.7);color:#fff;padding:7px 13px;border-radius:20px;font-size:13px;white-space:nowrap}
 </style>
 </head>
-
 <body>
-
 <div id="carrusel">
-
-  <!-- 1 ALMUERZO -->
-  <section class="pagina almuerzo">
-    <div class="recorte">
-      <img src="menu.png" alt="Almuerzo">
-    </div>
-  </section>
-
-
-  <!-- 2 PICOTEO -->
-  <section class="pagina picoteo">
-    <div class="recorte">
-      <img src="menu.png" alt="Picoteo">
-    </div>
-  </section>
-
-
-  <!-- 3 PARRILLA -->
-  <section class="pagina parrilla">
-    <div class="recorte">
-      <img src="menu.png" alt="Parrilla">
-    </div>
-  </section>
-
-
-  <!-- 4 BEBIDAS -->
-  <section class="pagina bebidas">
-    <div class="recorte">
-      <img src="menu.png" alt="Bebidas">
-    </div>
-  </section>
-
-
-  <!-- 5 PARA LA GARGANTA -->
-  <section class="pagina garganta">
-    <div class="recorte">
-      <img src="menu.png" alt="Para la garganta">
-    </div>
-  </section>
-
-
-  <!-- 6 DESAYUNO -->
-  <section class="pagina desayuno">
-    <div class="recorte">
-      <img src="menu.png" alt="Desayuno">
-    </div>
-  </section>
-
-
-  <!-- 7 ENSALADAS -->
-  <section class="pagina ensaladas">
-    <div class="recorte">
-      <img src="menu.png" alt="Ensaladas">
-    </div>
-  </section>
-
-
-  <!-- 8 AGREGADOS -->
-  <section class="pagina agregados">
-    <div class="recorte">
-      <img src="menu.png" alt="Agregados">
-    </div>
-  </section>
-
+  <section class="pagina"><img src="01-almuerzo.png" alt="Almuerzo"></section>
+  <section class="pagina"><img src="02-picoteo.png" alt="Picoteo"></section>
+  <section class="pagina"><img src="03-parrilla.png" alt="Parrilla"></section>
+  <section class="pagina"><img src="04-bebidas.png" alt="Bebidas"></section>
+  <section class="pagina"><img src="05-para-la-garganta.png" alt="Para la garganta"></section>
+  <section class="pagina"><img src="06-desayuno.png" alt="Desayuno"></section>
+  <section class="pagina"><img src="07-ensaladas.png" alt="Ensaladas"></section>
+  <section class="pagina"><img src="08-agregados.png" alt="Agregados"></section>
 </div>
-
-
-<div id="indicador">
-Almuerzo • 1/8
-</div>
-
-
+<div id="indicador">Almuerzo • 1/8</div>
 <script>
-
-const carrusel =
-document.getElementById("carrusel");
-
-const indicador =
-document.getElementById("indicador");
-
-const nombres = [
-  "Almuerzo",
-  "Picoteo",
-  "Parrilla",
-  "Bebidas",
-  "Para la garganta",
-  "Desayuno",
-  "Ensaladas",
-  "Agregados"
-];
-
-function actualizar(){
-
-  const pagina =
-  Math.round(
-    carrusel.scrollLeft /
-    carrusel.clientWidth
-  );
-
-  indicador.textContent =
-  nombres[pagina] +
-  " • " +
-  (pagina + 1) +
-  "/8";
-}
-
-carrusel.addEventListener(
-  "scroll",
-  actualizar
-);
-
+const c=document.getElementById('carrusel');
+const i=document.getElementById('indicador');
+const n=["Almuerzo","Picoteo","Parrilla","Bebidas","Para la garganta","Desayuno","Ensaladas","Agregados"];
+function u(){const p=Math.round(c.scrollLeft/c.clientWidth);i.textContent=n[p]+" • "+(p+1)+"/8"}
+c.addEventListener('scroll',u,{passive:true});
+window.addEventListener('resize',u);
 </script>
-
 </body>
 </html>
