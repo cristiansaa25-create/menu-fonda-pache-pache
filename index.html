@@ -1,1 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fonda Pache Pache</title>
 
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #2b160d;
+  overflow: hidden;
+}
+
+#menu {
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+#menu::-webkit-scrollbar {
+  display: none;
+}
+
+.pagina {
+  min-width: 100%;
+  width: 100%;
+  height: 100dvh;
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.pagina img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#contador {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.72);
+  color: white;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  z-index: 100;
+  white-space: nowrap;
+}
+</style>
+</head>
+
+<body>
+
+<div id="menu">
+
+  <div class="pagina">
+    <img src="01-almuerzo.png" alt="Almuerzo">
+  </div>
+
+  <div class="pagina">
+    <img src="02-picoteo.png" alt="Picoteo">
+  </div>
+
+  <div class="pagina">
+    <img src="03-parrilla.png" alt="Parrilla">
+  </div>
+
+  <div class="pagina">
+    <img src="04-bebidas.png" alt="Bebidas">
+  </div>
+
+  <div class="pagina">
+    <img src="05-para-la-garganta.png" alt="Para la garganta">
+  </div>
+
+  <div class="pagina">
+    <img src="06-desayuno.png" alt="Desayuno">
+  </div>
+
+  <div class="pagina">
+    <img src="07-ensaladas.png" alt="Ensaladas">
+  </div>
+
+  <div class="pagina">
+    <img src="08-agregados.png" alt="Agregados">
+  </div>
+
+</div>
+
+<div id="contador">Almuerzo • 1/8</div>
+
+<script>
+const menu = document.getElementById("menu");
+const contador = document.getElementById("contador");
+
+const nombres = [
+  "Almuerzo",
+  "Picoteo",
+  "Parrilla",
+  "Bebidas",
+  "Para la garganta",
+  "Desayuno",
+  "Ensaladas",
+  "Agregados"
+];
+
+function actualizar() {
+  const pagina = Math.round(menu.scrollLeft / menu.clientWidth);
+  contador.textContent =
+    nombres[pagina] + " • " + (pagina + 1) + "/8";
+}
+
+menu.addEventListener("scroll", actualizar);
+</script>
+
+</body>
+</html>
