@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Administración - Fonda Pache Pache</title>
+<title>Administrador - Fonda Pache Pache</title>
 
 <style>
 body{
     font-family:Arial,sans-serif;
-    background:#f5f5f5;
+    background:#f5f1e8;
     margin:0;
     padding:20px;
 }
@@ -20,7 +20,7 @@ body{
     background:white;
     padding:20px;
     border-radius:15px;
-    box-shadow:0 3px 15px #aaa;
+    box-shadow:0 3px 12px #999;
 }
 
 h1{
@@ -34,42 +34,57 @@ input,select,button{
     margin:7px 0;
     font-size:16px;
     border-radius:8px;
-    border:1px solid #ccc;
+}
+
+input,select{
+    border:1px solid #bbb;
 }
 
 button{
-    background:#1565c0;
+    border:0;
+    background:#198754;
     color:white;
-    border:none;
     font-weight:bold;
     cursor:pointer;
 }
 
-button:hover{
-    background:#0d47a1;
+button:active{
+    opacity:.8;
+}
+
+#btnSalir{
+    background:#555;
+}
+
+.producto{
+    background:#f2f2f2;
+    padding:12px;
+    margin:8px 0;
+    border-radius:8px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
+.producto-info{
+    flex:1;
 }
 
 .eliminar{
     background:#c62828;
+    width:auto;
+    padding:8px 12px;
 }
 
 .oculto{
     display:none;
 }
 
-.producto{
-    border-bottom:1px solid #ddd;
-    padding:10px 0;
-}
-
-.precio{
-    font-weight:bold;
-}
-
 #mensaje{
     text-align:center;
+    margin-top:12px;
     font-weight:bold;
-    margin:10px 0;
 }
 </style>
 </head>
@@ -78,26 +93,27 @@ button:hover{
 
 <div class="contenedor">
 
-<h1>Fonda Pache Pache</h1>
-<h2>Administración del menú</h2>
+<h1>Administrador</h1>
+<p style="text-align:center">Fonda Pache Pache</p>
 
 <div id="login">
 
 <input
-    type="email"
     id="email"
-    placeholder="Correo electrónico">
+    type="email"
+    placeholder="Correo administrador">
 
 <input
-    type="password"
     id="password"
+    type="password"
     placeholder="Contraseña">
 
-<button id="btnLogin">
-    Iniciar sesión
+<button id="btnIngresar">
+    Ingresar
 </button>
 
 </div>
+
 
 <div id="panel" class="oculto">
 
@@ -161,4 +177,252 @@ import {
     serverTimestamp,
     query,
     orderBy
-} from "https://www.gstatic.com/firebasejs/12
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+const login = document.getElementById("login");
+const panel = document.getElementById("panel");
+const mensaje = document.getElementById("mensaje");
+
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+
+const categoria = document.getElementById("categoria");
+const nombre = document.getElementById("nombre");
+const precio = document.getElementById("precio");
+
+const productos = document.getElementById("productos");
+
+
+document.getElementById("btnIngresar")
+.addEventListener("click", async () => {
+
+    mensaje.textContent = "Ingresando...";
+
+    try {
+
+        await signInWithEmailAndPassword(
+            auth,
+            email.value.trim(),
+            password.value
+        );
+
+        mensaje.textContent = "";
+
+    } catch(error) {
+
+        console.error(error);
+
+        mensaje.textContent =
+        "No se pudo iniciar sesión. Revisa correo y contraseña.";
+    }
+
+});
+
+
+document.getElementById("btnSalir")
+.addEventListener("click", async () => {
+
+    await signOut(auth);
+
+});
+
+
+onAuthStateChanged(auth, usuario => {
+
+    if(usuario){
+
+        login.classList.add("oculto");
+        panel.classList.remove("oculto");
+
+    }else{
+
+        login.classList.remove("oculto");
+        panel.classList.add("oculto");
+
+    }
+
+});
+
+
+document.getElementById("btnGuardar")
+.addEventListener("click", async () => {
+
+    const nombreProducto = nombre.value.trim();
+    const precioProducto = Number(precio.value);
+
+    if(!nombreProducto){
+
+        mensaje.textContent =
+        "Escribe el nombre del producto.";
+
+        return;
+    }
+
+    if(!Number.isFinite(precioProducto) || precioProducto < 0){
+
+        mensaje.textContent =
+        "Ingresa un precio válido.";
+
+        return;
+    }
+
+    try {
+
+        await addDoc(
+            collection(db,"productos"),
+            {
+                nombre:nombreProducto,
+                precio:precioProducto,
+                categoria:categoria.value,
+                creado:serverTimestamp()
+            }
+        );
+
+        nombre.value = "";
+        precio.value = "";
+
+        mensaje.textContent =
+        "Producto guardado correctamente.";
+
+    } catch(error){
+
+        console.error(error);
+
+        mensaje.textContent =
+        "Error al guardar el producto.";
+    }
+
+});
+
+
+const consulta = query(
+    collection(db,"productos"),
+    orderBy("creado","desc")
+);
+
+
+onSnapshot(
+    consulta,
+
+    snapshot => {
+
+        productos.innerHTML = "";
+
+        if(snapshot.empty){
+
+            productos.innerHTML =
+            "<p>No hay productos guardados.</p>";
+
+            return;
+        }
+
+        snapshot.forEach(documento => {
+
+            const datos = documento.data();
+
+            const fila =
+            document.createElement("div");
+
+            fila.className = "producto";
+
+
+            const info =
+            document.createElement("div");
+
+            info.className = "producto-info";
+
+            const nombreElemento =
+            document.createElement("strong");
+
+            nombreElemento.textContent =
+            datos.nombre || "Sin nombre";
+
+
+            const detalle =
+            document.createElement("div");
+
+            const precioFormateado =
+            Number(datos.precio || 0)
+            .toLocaleString("es-CL");
+
+            detalle.textContent =
+            (datos.categoria || "") +
+            " — $" +
+            precioFormateado;
+
+
+            info.appendChild(nombreElemento);
+            info.appendChild(document.createElement("br"));
+            info.appendChild(detalle);
+
+
+            const boton =
+            document.createElement("button");
+
+            boton.className = "eliminar";
+            boton.textContent = "Eliminar";
+
+            boton.addEventListener(
+                "click",
+                async () => {
+
+                    const confirmar =
+                    window.confirm(
+                        "¿Eliminar " +
+                        (datos.nombre || "este producto") +
+                        "?"
+                    );
+
+                    if(!confirmar){
+                        return;
+                    }
+
+                    try {
+
+                        await deleteDoc(
+                            doc(
+                                db,
+                                "productos",
+                                documento.id
+                            )
+                        );
+
+                        mensaje.textContent =
+                        "Producto eliminado.";
+
+                    } catch(error){
+
+                        console.error(error);
+
+                        mensaje.textContent =
+                        "No se pudo eliminar.";
+                    }
+
+                }
+            );
+
+
+            fila.appendChild(info);
+            fila.appendChild(boton);
+
+            productos.appendChild(fila);
+
+        });
+
+    },
+
+    error => {
+
+        console.error(error);
+
+        mensaje.textContent =
+        "No se pudieron cargar los productos.";
+
+    }
+);
+
+</script>
+
+</body>
+</html>
