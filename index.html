@@ -61,6 +61,7 @@ html, body {
 }
 
 /* PRECIOS SOBRE LA IMAGEN */
+
 .precio {
   position: absolute;
   left: 61%;
@@ -152,7 +153,9 @@ html, body {
 
 <div id="contador">Almuerzo • 1/8</div>
 
+
 <script>
+
 const menu = document.getElementById("menu");
 const contador = document.getElementById("contador");
 
@@ -168,6 +171,7 @@ const nombres = [
 ];
 
 function actualizar() {
+
   const pagina = Math.round(
     menu.scrollLeft / menu.clientWidth
   );
@@ -179,13 +183,21 @@ function actualizar() {
     "/8";
 }
 
-menu.addEventListener("scroll", actualizar);
+menu.addEventListener(
+  "scroll",
+  actualizar
+);
+
 </script>
+
 
 <script type="module">
 
-import { initializeApp }
+import {
+  initializeApp
+}
 from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
 
 import {
   getFirestore,
@@ -214,19 +226,26 @@ const firebaseConfig = {
 
   appId:
   "1:385605487668:web:dad962c8a71e39f7bece61"
+
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+  initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+const db =
+  getFirestore(app);
 
 
-/* POSICIÓN DE CADA PRECIO */
+
+/* =====================================
+   POSICIONES FIJAS DE LOS PRODUCTOS
+   ===================================== */
 
 const posiciones = {
 
   "Almuerzo": {
+
     "Pollo asado": 50.6,
     "Cazuela": 54.1,
     "Costillar": 57.6,
@@ -236,9 +255,12 @@ const posiciones = {
     "Pernil": 71.5,
     "Lomo vetado": 75.0,
     "Menú niño": 78.5
+
   },
 
+
   "Picoteo": {
+
     "Completos": 53.7,
     "Churrasco": 57.0,
     "Salchipapa": 60.2,
@@ -248,14 +270,20 @@ const posiciones = {
     "Media luna - 3 x 2000": 73.0,
     "Chorrillana": 76.3,
     "Sándwich de lomito": 79.5
+
   },
+
 
   "Parrilla": {
+
     "Anticucho": 66.0,
     "Choripán": 69.8
+
   },
 
+
   "Bebidas": {
+
     "Terremoto niño": 55.0,
     "Bebida lata": 58.8,
     "Agua botella": 62.6,
@@ -263,150 +291,275 @@ const posiciones = {
     "Vino 3/4": 70.2,
     "Whisky + 4 latas": 74.0,
     "Pisco + 4 latas": 77.8
+
   },
 
+
   "Para la garganta": {
+
     "Terremoto": 62.1,
     "Michelada": 66.0,
     "Cerveza lata": 69.9,
     "Cerveza": 73.8,
     "Whisky": 77.7
+
   },
+
 
   "Desayuno": {
+
     "Té": 64.0,
     "Café": 68.0
+
   },
+
 
   "Ensaladas": {
+
     "Chilena": 68.2,
     "Tomate solo": 72.1
+
   },
 
+
   "Agregados": {
+
     "Arroz": 66.4,
     "Papa mayo": 70.2,
     "Papa cocida": 74.0,
     "Papa frita": 77.8
+
   }
 
 };
 
 
-/* NORMALIZA LOS NOMBRES */
+
+/* =====================================
+   NORMALIZAR TEXTO
+   ===================================== */
 
 function normalizar(texto) {
 
   return String(texto || "")
+
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[–—]/g, "-")
-    .replace(/\s+/g, " ")
+
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+
+    .replace(
+      /[–—]/g,
+      "-"
+    )
+
+    .replace(
+      /\s+/g,
+      " "
+    )
+
     .trim()
+
     .toLowerCase();
+
 }
 
 
-/* FORMATO PESOS CHILENOS */
+
+/* =====================================
+   FORMATO PRECIO CHILENO
+   ===================================== */
 
 function precioCLP(valor) {
 
-  const numero = Number(valor);
+  const numero =
+    Number(valor);
 
-  if (!Number.isFinite(numero)) {
+  if(
+    !Number.isFinite(numero)
+  ){
     return "";
   }
 
   return "$" +
     Math.round(numero)
     .toLocaleString("es-CL");
+
 }
 
 
-/* COLOCAR PRECIO SOBRE LA IMAGEN */
+
+/* =====================================
+   MOSTRAR PRECIO
+   ===================================== */
 
 function pintarPrecio(datos) {
 
+
+  /* Encontrar categoría */
+
   const categoriaEncontrada =
-    Object.keys(posiciones).find(
+    Object.keys(posiciones)
+    .find(
       categoria =>
+
       normalizar(categoria) ===
       normalizar(datos.categoria)
     );
 
-  if (!categoriaEncontrada) {
+
+  if(!categoriaEncontrada){
     return;
   }
 
+
+
+  /*
+   IMPORTANTE:
+
+   Si el producto fue renombrado,
+   buscamos la posición usando
+   nombreOriginal.
+
+   Si todavía no tiene nombreOriginal,
+   usamos nombre.
+  */
+
+  const nombreReferencia =
+    datos.nombreOriginal ||
+    datos.nombre;
+
+
+
+  /* Encontrar posición del producto */
 
   const productoEncontrado =
     Object.keys(
-      posiciones[categoriaEncontrada]
-    ).find(
+      posiciones[
+        categoriaEncontrada
+      ]
+    )
+    .find(
       producto =>
+
       normalizar(producto) ===
-      normalizar(datos.nombre)
+      normalizar(nombreReferencia)
     );
 
-  if (!productoEncontrado) {
+
+  if(!productoEncontrado){
     return;
   }
 
 
+
+  /* Encontrar hoja correspondiente */
+
   const hoja =
-    [...document.querySelectorAll(".hoja")]
+    [
+      ...document
+      .querySelectorAll(".hoja")
+    ]
     .find(
       elemento =>
+
       normalizar(
         elemento.dataset.categoria
       ) ===
-      normalizar(categoriaEncontrada)
+
+      normalizar(
+        categoriaEncontrada
+      )
     );
 
-  if (!hoja) {
+
+  if(!hoja){
     return;
   }
 
+
+
+  /* Crear precio */
 
   const precio =
     document.createElement("div");
 
-  precio.className = "precio";
+  precio.className =
+    "precio";
+
 
   precio.style.top =
-    posiciones[categoriaEncontrada]
-    [productoEncontrado] + "%";
+    posiciones[
+      categoriaEncontrada
+    ][
+      productoEncontrado
+    ] + "%";
+
 
   precio.textContent =
-    precioCLP(datos.precio);
+    precioCLP(
+      datos.precio
+    );
 
-  hoja.appendChild(precio);
+
+  hoja.appendChild(
+    precio
+  );
+
 }
 
 
-/* LEER FIRESTORE AUTOMÁTICAMENTE */
+
+/* =====================================
+   FIRESTORE EN TIEMPO REAL
+   ===================================== */
 
 onSnapshot(
-  collection(db, "menu"),
+
+  collection(
+    db,
+    "menu"
+  ),
+
 
   snapshot => {
 
+
+    /*
+    Quitar precios anteriores
+    antes de volver a dibujarlos.
+    */
+
     document
-      .querySelectorAll(".precio")
-      .forEach(elemento =>
-        elemento.remove()
+      .querySelectorAll(
+        ".precio"
+      )
+      .forEach(
+        elemento =>
+          elemento.remove()
       );
 
 
-    snapshot.forEach(documento => {
 
-      pintarPrecio(
-        documento.data()
-      );
+    /*
+    Dibujar todos los productos
+    guardados en Firebase.
+    */
 
-    });
+    snapshot.forEach(
+      documento => {
+
+        pintarPrecio(
+          documento.data()
+        );
+
+      }
+    );
 
   },
+
 
   error => {
 
@@ -416,6 +569,7 @@ onSnapshot(
     );
 
   }
+
 );
 
 </script>
