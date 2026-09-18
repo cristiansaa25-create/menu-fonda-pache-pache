@@ -41,11 +41,9 @@ html,body{
   width:100%;
   height:100dvh;
   flex:0 0 100%;
-
   display:flex;
   justify-content:center;
   align-items:center;
-
   scroll-snap-align:start;
   scroll-snap-stop:always;
 }
@@ -64,278 +62,132 @@ html,body{
   object-fit:fill;
 }
 
-
-/* =====================================
-   NOMBRE MODIFICADO
-   Franja más ancha para tapar
-   completamente el nombre antiguo
-   ===================================== */
+/* NOMBRE MODIFICADO */
 
 .nombre-dinamico{
-
   position:absolute;
-
   left:7.5%;
-
-  /* ANTES ERA 53% */
   width:84.5%;
-
   height:2.9%;
-
   transform:translateY(-50%);
-
   z-index:30;
-
   display:flex;
   align-items:center;
-
-  /* COLOR CREMA DEL PAPEL */
   background:#f4ddbf;
-
   color:#111;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
+  font-family:Georgia,"Times New Roman",serif;
   font-weight:bold;
-
-  font-size:
-    clamp(14px,2.25vh,23px);
-
+  font-size:clamp(14px,2.25vh,23px);
   line-height:1;
-
   white-space:nowrap;
-
   padding-left:1%;
 }
 
-
-/* =====================================
-   PRECIOS
-   Quedan por encima de la franja
-   ===================================== */
+/* PRECIOS */
 
 .precio{
-
   position:absolute;
-
   left:61%;
   width:31%;
-
   transform:translateY(-50%);
-
   text-align:right;
-
   color:#111;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
+  font-family:Georgia,"Times New Roman",serif;
   font-weight:bold;
-
-  font-size:
-    clamp(14px,2.25vh,23px);
-
+  font-size:clamp(14px,2.25vh,23px);
   line-height:1;
-
   white-space:nowrap;
-
-  /* POR ENCIMA DEL NOMBRE */
   z-index:40;
-
   text-shadow:
     0 1px 2px #fff,
     0 0 3px #fff;
 }
 
-
-/* CONTADOR */
+/* INDICADOR DE PÁGINA */
 
 #contador{
-
   position:fixed;
-
   bottom:18px;
   left:50%;
-
   transform:translateX(-50%);
-
   background:rgba(0,0,0,.72);
-
   color:white;
-
   padding:7px 14px;
-
   border-radius:20px;
-
-  font-family:
-    Arial,
-    sans-serif;
-
+  font-family:Arial,sans-serif;
   font-size:14px;
-
   z-index:100;
-
   white-space:nowrap;
 }
 
 </style>
 </head>
 
-
 <body>
-
 
 <div id="menu">
 
-
 <!-- 1 ALMUERZO -->
-
 <div class="pagina">
-
-  <div
-    class="hoja"
-    data-categoria="Almuerzo">
-
-    <img
-      src="01-almuerzo.png"
-      alt="Almuerzo">
-
+  <div class="hoja" data-categoria="Almuerzo">
+    <img src="01-almuerzo.png" alt="Almuerzo">
   </div>
-
 </div>
-
 
 <!-- 2 PICOTEO -->
-
 <div class="pagina">
-
-  <div
-    class="hoja"
-    data-categoria="Picoteo">
-
-    <img
-      src="02-picoteo.png"
-      alt="Picoteo">
-
+  <div class="hoja" data-categoria="Picoteo">
+    <img src="02-picoteo.png" alt="Picoteo">
   </div>
-
 </div>
-
 
 <!-- 3 PARRILLA -->
-
 <div class="pagina">
-
-  <div
-    class="hoja"
-    data-categoria="Parrilla">
-
-    <img
-      src="03-parrilla.png"
-      alt="Parrilla">
-
+  <div class="hoja" data-categoria="Parrilla">
+    <img src="03-parrilla.png" alt="Parrilla">
   </div>
-
 </div>
-
 
 <!-- 4 BEBIDAS -->
-
 <div class="pagina">
-
-  <div
-    class="hoja"
-    data-categoria="Bebidas">
-
-    <img
-      src="04-bebidas.png"
-      alt="Bebidas">
-
+  <div class="hoja" data-categoria="Bebidas">
+    <img src="04-bebidas.png" alt="Bebidas">
   </div>
-
 </div>
-
 
 <!-- 5 PARA LA GARGANTA -->
-
 <div class="pagina">
-
-  <div
-    class="hoja"
-    data-categoria="Para la garganta">
-
-    <img
-      src="05-para-la-garganta.png"
-      alt="Para la garganta">
-
+  <div class="hoja" data-categoria="Para la garganta">
+    <img src="05-para-la-garganta.png" alt="Para la garganta">
   </div>
-
 </div>
-
 
 <!-- 6 DESAYUNO -->
-
 <div class="pagina">
-
-  <div
-    class="hoja"
-    data-categoria="Desayuno">
-
-    <img
-      src="06-desayuno.png"
-      alt="Desayuno">
-
+  <div class="hoja" data-categoria="Desayuno">
+    <img src="06-desayuno.png" alt="Desayuno">
   </div>
-
 </div>
-
 
 <!-- 7 ENSALADAS -->
-
 <div class="pagina">
-
-  <div
-    class="hoja"
-    data-categoria="Ensaladas">
-
-    <img
-      src="07-ensaladas.png"
-      alt="Ensaladas">
-
+  <div class="hoja" data-categoria="Ensaladas">
+    <img src="07-ensaladas.png" alt="Ensaladas">
   </div>
-
 </div>
-
 
 <!-- 8 AGREGADOS -->
-
 <div class="pagina">
-
-  <div
-    class="hoja"
-    data-categoria="Agregados">
-
-    <img
-      src="08-agregados.png"
-      alt="Agregados">
-
+  <div class="hoja" data-categoria="Agregados">
+    <img src="08-agregados.png" alt="Agregados">
   </div>
-
 </div>
 
-
 </div>
-
 
 <div id="contador">
 Almuerzo • 1/8
 </div>
-
 
 <script>
 
@@ -345,27 +197,16 @@ const menu =
 const contador =
   document.getElementById("contador");
 
-
 const nombres = [
-
   "Almuerzo",
-
   "Picoteo",
-
   "Parrilla",
-
   "Bebidas",
-
   "Para la garganta",
-
   "Desayuno",
-
   "Ensaladas",
-
   "Agregados"
-
 ];
-
 
 function actualizar(){
 
@@ -375,19 +216,12 @@ function actualizar(){
       menu.clientWidth
     );
 
-
   contador.textContent =
-
     nombres[pagina] +
-
     " • " +
-
     (pagina + 1) +
-
     "/8";
-
 }
-
 
 menu.addEventListener(
   "scroll",
@@ -396,9 +230,7 @@ menu.addEventListener(
 
 </script>
 
-
 <script type="module">
-
 
 import {
   initializeApp
@@ -406,19 +238,13 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
-
 import {
-
   getFirestore,
-
   collection,
-
   onSnapshot
-
 }
 from
 "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
 
 const firebaseConfig = {
 
@@ -442,147 +268,83 @@ const firebaseConfig = {
 
 };
 
-
 const app =
   initializeApp(firebaseConfig);
-
 
 const db =
   getFirestore(app);
 
-
-/* =====================================
-   POSICIONES
-   ===================================== */
+/* POSICIONES */
 
 const posiciones = {
 
-
 "Almuerzo":{
-
   "Pollo asado":50.6,
-
   "Cazuela":54.1,
-
   "Costillar":57.6,
-
   "Prieta":61.0,
-
   "Mechada":64.5,
-
   "Cocimiento":68.0,
-
   "Pernil":71.5,
-
   "Lomo vetado":75.0,
-
   "Menú niño":78.5
-
 },
-
 
 "Picoteo":{
-
   "Completos":53.7,
-
   "Churrasco":57.0,
-
   "Salchipapa":60.2,
-
   "Papas fritas":63.3,
-
   "Handroll":66.5,
-
   "Empanada de queso":69.8,
-
   "Media luna - 3 x 2000":73.0,
-
   "Chorrillana":76.3,
-
   "Sándwich de lomito":79.5
-
 },
-
 
 "Parrilla":{
-
   "Anticucho":66.0,
-
   "Choripán":69.8
-
 },
-
 
 "Bebidas":{
-
   "Terremoto niño":55.0,
-
   "Bebida lata":58.8,
-
   "Agua botella":62.6,
-
   "Jugo botella":66.4,
-
   "Vino 3/4":70.2,
-
   "Whisky + 4 latas":74.0,
-
   "Pisco + 4 latas":77.8
-
 },
-
 
 "Para la garganta":{
-
   "Terremoto":62.1,
-
   "Michelada":66.0,
-
   "Cerveza lata":69.9,
-
   "Cerveza":73.8,
-
   "Whisky":77.7
-
 },
-
 
 "Desayuno":{
-
   "Té":64.0,
-
   "Café":68.0
-
 },
-
 
 "Ensaladas":{
-
   "Chilena":68.2,
-
   "Tomate solo":72.1
-
 },
 
-
 "Agregados":{
-
   "Arroz":66.4,
-
   "Papa mayo":70.2,
-
   "Papa cocida":74.0,
-
   "Papa frita":77.8
-
 }
 
 };
 
-
-/* =====================================
-   NORMALIZAR TEXTO
-   ===================================== */
+/* NORMALIZAR TEXTO */
 
 function normalizar(texto){
 
@@ -608,252 +370,131 @@ function normalizar(texto){
     .trim()
 
     .toLowerCase();
-
 }
 
-
-/* =====================================
-   FORMATO PESOS CHILENOS
-   ===================================== */
+/* FORMATO PESOS CHILENOS */
 
 function precioCLP(valor){
 
   const numero =
     Number(valor);
 
-
-  if(
-    !Number.isFinite(numero)
-  ){
-
+  if(!Number.isFinite(numero)){
     return "";
-
   }
 
-
   return "$" +
-
     Math.round(numero)
-
-    .toLocaleString(
-      "es-CL"
-    );
-
+    .toLocaleString("es-CL");
 }
 
-
-/* =====================================
-   PINTAR PRODUCTO
-   ===================================== */
+/* PINTAR PRODUCTO */
 
 function pintarProducto(datos){
-
 
   const categoriaEncontrada =
 
     Object.keys(posiciones)
 
     .find(
-
       categoria =>
-
       normalizar(categoria) ===
-
-      normalizar(
-        datos.categoria
-      )
-
+      normalizar(datos.categoria)
     );
 
-
   if(!categoriaEncontrada){
-
     return;
-
   }
 
-
-  /*
-  nombreOriginal mantiene la
-  posición aunque cambies el nombre.
-  */
-
   const nombreReferencia =
-
     datos.nombreOriginal ||
-
     datos.nombre;
-
 
   const productoEncontrado =
 
     Object.keys(
-
-      posiciones[
-        categoriaEncontrada
-      ]
-
+      posiciones[categoriaEncontrada]
     )
 
     .find(
-
       producto =>
-
       normalizar(producto) ===
-
-      normalizar(
-        nombreReferencia
-      )
-
+      normalizar(nombreReferencia)
     );
 
-
   if(!productoEncontrado){
-
     return;
-
   }
-
 
   const hoja =
 
     [
       ...document
-      .querySelectorAll(
-        ".hoja"
-      )
+      .querySelectorAll(".hoja")
     ]
 
     .find(
-
       elemento =>
-
       normalizar(
-
-        elemento
-        .dataset
-        .categoria
-
+        elemento.dataset.categoria
       )
-
       ===
-
-      normalizar(
-        categoriaEncontrada
-      )
-
+      normalizar(categoriaEncontrada)
     );
 
-
   if(!hoja){
-
     return;
-
   }
 
-
   const posicion =
+    posiciones[categoriaEncontrada]
+    [productoEncontrado];
 
-    posiciones[
-      categoriaEncontrada
-    ][
-      productoEncontrado
-    ];
-
-
-/* =====================================
-   NOMBRE NUEVO
-   ===================================== */
-
+  /* NOMBRE NUEVO */
 
   const fueModificado =
 
     datos.nombreOriginal &&
 
-    normalizar(
-      datos.nombre
-    )
-
+    normalizar(datos.nombre)
     !==
-
-    normalizar(
-      datos.nombreOriginal
-    );
-
+    normalizar(datos.nombreOriginal);
 
   if(fueModificado){
 
-
     const nombreNuevo =
-
-      document
-      .createElement(
-        "div"
-      );
-
+      document.createElement("div");
 
     nombreNuevo.className =
-
       "nombre-dinamico";
 
-
     nombreNuevo.style.top =
-
       posicion + "%";
 
-
     nombreNuevo.textContent =
-
       datos.nombre;
 
-
-    hoja.appendChild(
-      nombreNuevo
-    );
-
+    hoja.appendChild(nombreNuevo);
   }
 
-
-/* =====================================
-   PRECIO
-   ===================================== */
-
+  /* PRECIO */
 
   const precio =
-
-    document
-    .createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   precio.className =
     "precio";
 
-
   precio.style.top =
-
     posicion + "%";
 
-
   precio.textContent =
+    precioCLP(datos.precio);
 
-    precioCLP(
-      datos.precio
-    );
-
-
-  hoja.appendChild(
-    precio
-  );
-
+  hoja.appendChild(precio);
 }
 
-
-/* =====================================
-   FIREBASE EN TIEMPO REAL
-   ===================================== */
-
+/* FIREBASE EN TIEMPO REAL */
 
 onSnapshot(
 
@@ -862,147 +503,38 @@ onSnapshot(
     "menu"
   ),
 
-
   snapshot => {
-
 
     document
 
     .querySelectorAll(
-
       ".precio, .nombre-dinamico"
-
     )
 
     .forEach(
-
       elemento =>
-
       elemento.remove()
-
     );
-
 
     snapshot.forEach(
-
       documento => {
-
-
         pintarProducto(
-
           documento.data()
-
         );
-
-
       }
-
     );
-
-
   },
-
 
   error => {
 
-
     console.error(
-
       "Error leyendo Firestore:",
-
       error
-
     );
-
 
   }
 
 );
-
-
-</script>
-<script type="module">
-
-import { initializeApp, getApps }
-from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  serverTimestamp
-}
-from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
-const firebaseConfigVisitas = {
-  apiKey: "AIzaSyAUNLLg-qxtfA4IbWXWv6GP8iTnoYzmBjA",
-  authDomain: "fonda-pache-pache-menu.firebaseapp.com",
-  projectId: "fonda-pache-pache-menu",
-  storageBucket: "fonda-pache-pache-menu.firebasestorage.app",
-  messagingSenderId: "385605487668",
-  appId: "1:385605487668:web:dad962c8a71e39f7bece61"
-};
-
-const appVisitas = getApps().length
-  ? getApps()[0]
-  : initializeApp(firebaseConfigVisitas);
-
-const dbVisitas = getFirestore(appVisitas);
-
-// ID aproximado para reconocer el mismo dispositivo
-let dispositivo = localStorage.getItem("fonda_dispositivo_id");
-
-if (!dispositivo) {
-  dispositivo =
-    (crypto.randomUUID && crypto.randomUUID()) ||
-    Date.now() + "-" + Math.random().toString(36).substring(2);
-
-  localStorage.setItem(
-    "fonda_dispositivo_id",
-    dispositivo
-  );
-}
-
-function detectarDispositivo() {
-
-  const ua = navigator.userAgent.toLowerCase();
-
-  if (ua.includes("android")) return "Android";
-  if (ua.includes("iphone")) return "iPhone";
-  if (ua.includes("ipad")) return "iPad";
-  if (ua.includes("windows")) return "Windows";
-  if (ua.includes("macintosh")) return "Mac";
-
-  return "Otro";
-}
-
-async function registrarVisita() {
-
-  try {
-
-    await addDoc(
-      collection(dbVisitas, "visitas_menu"),
-      {
-        timestamp: serverTimestamp(),
-        dispositivo: dispositivo,
-        tipoDispositivo: detectarDispositivo(),
-        pagina: "menu-fonda-pache-pache"
-      }
-    );
-
-    console.log("Visita registrada");
-
-  } catch (error) {
-
-    console.error(
-      "Error registrando visita:",
-      error
-    );
-
-  }
-}
-
-registrarVisita();
 
 </script>
 
