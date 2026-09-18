@@ -921,7 +921,90 @@ onSnapshot(
 
 
 </script>
+<script type="module">
 
+import { initializeApp, getApps }
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+const firebaseConfigVisitas = {
+  apiKey: "AIzaSyAUNLLg-qxtfA4IbWXWv6GP8iTnoYzmBjA",
+  authDomain: "fonda-pache-pache-menu.firebaseapp.com",
+  projectId: "fonda-pache-pache-menu",
+  storageBucket: "fonda-pache-pache-menu.firebasestorage.app",
+  messagingSenderId: "385605487668",
+  appId: "1:385605487668:web:dad962c8a71e39f7bece61"
+};
+
+const appVisitas = getApps().length
+  ? getApps()[0]
+  : initializeApp(firebaseConfigVisitas);
+
+const dbVisitas = getFirestore(appVisitas);
+
+// ID aproximado para reconocer el mismo dispositivo
+let dispositivo = localStorage.getItem("fonda_dispositivo_id");
+
+if (!dispositivo) {
+  dispositivo =
+    (crypto.randomUUID && crypto.randomUUID()) ||
+    Date.now() + "-" + Math.random().toString(36).substring(2);
+
+  localStorage.setItem(
+    "fonda_dispositivo_id",
+    dispositivo
+  );
+}
+
+function detectarDispositivo() {
+
+  const ua = navigator.userAgent.toLowerCase();
+
+  if (ua.includes("android")) return "Android";
+  if (ua.includes("iphone")) return "iPhone";
+  if (ua.includes("ipad")) return "iPad";
+  if (ua.includes("windows")) return "Windows";
+  if (ua.includes("macintosh")) return "Mac";
+
+  return "Otro";
+}
+
+async function registrarVisita() {
+
+  try {
+
+    await addDoc(
+      collection(dbVisitas, "visitas_menu"),
+      {
+        timestamp: serverTimestamp(),
+        dispositivo: dispositivo,
+        tipoDispositivo: detectarDispositivo(),
+        pagina: "menu-fonda-pache-pache"
+      }
+    );
+
+    console.log("Visita registrada");
+
+  } catch (error) {
+
+    console.error(
+      "Error registrando visita:",
+      error
+    );
+
+  }
+}
+
+registrarVisita();
+
+</script>
 
 </body>
 </html>
