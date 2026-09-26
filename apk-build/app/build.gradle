@@ -1,0 +1,14 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'cl.cristian.wifirecovery'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'cl.cristian.wifirecovery'
+        minSdk 26
+        targetSdk 28
+        versionCode 5
+        versionName '1.4'
+    }
+    buildTypes { release { minifyEnabled false } }
+}
