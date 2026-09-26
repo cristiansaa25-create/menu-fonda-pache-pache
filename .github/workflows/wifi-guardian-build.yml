@@ -2,9 +2,8 @@ name: Build WiFi Guardian APK
 on:
   push:
     branches: [build-wifi-guardian-v14]
-    paths:
-      - 'apk-build/**'
-      - '.github/workflows/wifi-guardian-build.yml'
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 jobs:
   build:
